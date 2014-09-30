@@ -25,6 +25,7 @@
                 <a class="brand" href="">ClearTrip</a>
             </div>
         </div>
+        <br /><br /><br />
 
         <div class="span12" style="text-align:center; margin: 0 auto;">
             <mtw:form klass="form-horizontal" method="post" action="Login.mtw">

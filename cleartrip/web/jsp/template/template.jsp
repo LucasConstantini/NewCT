@@ -10,7 +10,7 @@
         <link href="css/tabela.css" rel="stylesheet">
         <style>
             body {
-                padding-top: 60px;
+                padding-top: 5px;
             }
         </style>
         <script src="js/jquery.js"></script>
