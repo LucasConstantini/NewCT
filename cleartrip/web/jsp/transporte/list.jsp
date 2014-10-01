@@ -9,20 +9,20 @@
     </head>
 
     <body>
-        <div>
+        <div class="input-append">
             <mtw:form action="TransporteRead.mtw">
                 <mtw:input name="nome" type="text"/>
-                <button class="btn" type="submit"><i class="icon-search"></i> Pesquisar</button>
-                <a href="TransporteShowForm.mtw" class="btn"><i class="icon-plus"></i> Novo</a>
-            </mtw:form>
+                <button class="btn" type="submit"><img src='img/pesquisar.png'></button>
+                <a href="TransporteShowForm.mtw" class="btn"><img src='img/novo.png'>Novo</a>
+                </mtw:form>
         </div>
         <div>
             <div class="tabela">
                 <display:table name="lista" id="item" pagesize="3" requestURI="" defaultsort="1" sort="list">
-                    <display:column property="id" sortName="id" sortable="true" title="Código" style="width:10%;"/>
-                    <display:column property="nome" sortable="true" title="Nome" style="width:80%;"/>
-                    <display:column value="Editar" href="TransporteShowForm.mtw" paramId="id" paramProperty="id" style="width:5%;"/>
-                    <display:column value="Excluir" href="TransporteDelete.mtw"  paramId="id" paramProperty="id" style="width:5%;"/>
+                    <display:column property="id" sortName="id" sortable="true" title="Código" style="width:20%;"/>
+                    <display:column property="nome" sortable="true" title="Nome" style="width:50%;"/>
+                    <display:column value="<img src='img/editar.png'alt='Editar'>" href="TransporteShowForm.mtw" paramId="id" paramProperty="id" style="width:15%;"/>
+                    <display:column value="<img src='img/lixeira.png'alt='Excluir'>" href="TransporteDelete.mtw"  paramId="id" paramProperty="id" style="width:15%;"/>
                 </display:table>
             </div>
         </div>

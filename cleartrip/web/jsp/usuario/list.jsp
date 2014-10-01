@@ -2,13 +2,13 @@
 <%@include file="../../WEB-INF/imports.jspf"%>
 <head>
     <script>
-        $(function(){
+        $(function() {
             $('#Usuarios').addClass('active');
         });
     </script>
 </head>
 
-<div class="input-append tabelaFormatacao">
+<div class="input-append">
     <mtw:form action="UsuarioRead.mtw" method="post">
         <mtw:input name="nome" type="text"/>
         <button class="btn" type="submit"><img src='img/pesquisar.png'></button>
@@ -23,7 +23,7 @@
         <display:column property="nome" sortable="true" title="Nome" style="width:10%;"/>
         <display:column property="tipo" sortable="true" title="Tipo" style="width:10%;"/>
         <display:column title="Editar" value="<img src='img/editar.png'alt='Editar'>" href="UsuarioShowForm.mtw"  paramId="id" paramProperty="id" style="width:5%;"/>
-        <display:column title="Excluir" value="<img src='img/lixeira.png'alt='Alterar'>" href="UsuarioDelete.mtw" class="deleteLink" paramId="id" paramProperty="id" style="width:5%;"/>
+        <display:column title="Excluir" value="<img src='img/lixeira.png'alt='Excluir'>" href="UsuarioDelete.mtw" class="deleteLink" paramId="id" paramProperty="id" style="width:5%;"/>
     </display:table>
 </div>
 
@@ -82,23 +82,25 @@
 </div>
 <!--------------------------------------------------------------------------------->        
 <script>
-    $(function(){
-        $("td.deleteLink a").click(function(){
+    $(function() {
+        $("td.deleteLink a").click(function() {
             $('#confirmDelete').modal('show');
             $("#confirmDelete .btn-danger").attr("href", $(this).attr("href"));
             return false;
         });
-        if ($('#mensagemErro').val()){
+        if ($('#mensagemErro').val()) {
             $('#excessaoDelete').modal('show');
-            
-        };
-        if ($('#mensagemErroAdm').val()){
+
+        }
+        ;
+        if ($('#mensagemErroAdm').val()) {
             $('#excessaoDeleteAdm').modal('show');
-            
-        };
-        $('#botaoOk').click(function(){
+
+        }
+        ;
+        $('#botaoOk').click(function() {
             $('#mensagemErro').val('');
-                
+
         });
     });
 </script>
