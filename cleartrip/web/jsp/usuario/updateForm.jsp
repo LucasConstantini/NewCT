@@ -7,73 +7,66 @@
         });
     </script>
 </head>
-<mtw:form klass="form-horizontal blocoExterno" action="UsuarioUpdate.mtw" method="post" style="background-color: white">
-    <!--<mtw:input type="hidden" name="usuario.id"/>-->
+<mtw:form klass="form-horizontal blocoExterno" action="UsuarioUpdate.mtw" method="post">
+    <mtw:input type="hidden" name="usuario.id"/>
     <div>
-        <legend class ="sub-header">
-            <p style="margin-left: 40%">Alterar Usuário</p></legend>
+        <legend>Alterar Usuario</legend>
     </div>
-    <div class="blocoInterno imagemUsuarioEdit "> 
 
-        <div class="control-group">
-            <div class="control-group">
-                <label class="control-label" for="inputNome">Nome *</label>
-                <div class="controls">
-                    <mtw:input type="text" id="inputNome" name="usuario.nome"/>
-                    <span class="label label-important">${error.nome}</span>
-                </div>
-            </div>
-        </div>
-
-    </div>
-    <br/><br/>
     <div>
-        <label for="inputLogin">Login:</label>
+        <label for="inputNome">Nome</label>
         <div>
-            <mtw:input type="text" id="inputLogin" name="usuario.login"/>
+            <mtw:input type="text" id="inputNome" name="usuario.nome"/>
+            <span class="label label-important">${error.nome}</span>
         </div>
     </div>
-    <br/><br/>
+    <br />
     <div>
-        <label for="inputEmpresa">Empresa:</label>
+        <label for="inputEmpresa">Empresa</label>
         <div>
-            <mtw:input type="text" id="inputNome" name="usuario.empresa.nome"/>
+            <mtw:input type="text" id="inputEmpresa" name="usuario.empresa.nome"/>
         </div>
     </div>
+    <br />
     <div>
-        <label for="inputCpf">CPF:</label>
+        <label for="inputCpf">CPF</label>
         <div>
             <mtw:input type="text" id="inputCpf" name="usuario.cpf"/>
         </div>
     </div>
+    <br />
     <div>
-        <label for="inputRg">RG:</label>
+        <label for="inputRg">RG</label>
         <div>
             <mtw:input type="text" id="inputRg" name="usuario.rg"/>
         </div>
     </div>
+    <br />
     <div class="control-group">
         <label class="control-label" for="inputTipo">Tipo *</label>
         <div class="controls">
-            <select name="usuario.tipo">
+            <select value="usuario.tipo">
                 <option value="Financeiro">Financeiro</option>
                 <option value="Solicitante">Solicitante</option>
             </select>
-            <span class="label label-important">${error.tipo}</span>
+            
         </div>
     </div>
+    <br />
     <div>
         <label for="inputEmailPessoal">Email Pessoal:</label>
         <div>
             <mtw:input type="text" id="inputEmailPessoal" name="usuario.emailPessoal"/>
         </div>
     </div>
+    <br />
     <div>
         <label for="inputEmailCorporativo">Email Corporativo:</label>
         <div>
             <mtw:input type="text" id="inputEmailCorporativo" name="usuario.emailCorporativo"/>
         </div>
     </div>
+    <br />
     <div>
         <div>
             <label for="inputTelefonePessoal">Telefone Pessoal:</label>
