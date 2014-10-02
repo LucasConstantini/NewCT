@@ -8,11 +8,6 @@
         <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="css/bootstrap-responsive.css" rel="stylesheet">
         <link href="css/tabela.css" rel="stylesheet">
-        <style>
-            body {
-                padding-top: 5px;
-            }
-        </style>
         <script src="js/jquery.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <title>ClearTrip</title>     

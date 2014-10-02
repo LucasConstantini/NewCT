@@ -9,11 +9,6 @@
         <link href="css/bootstrap-responsive.css" rel="stylesheet">
         <link href="css/tabela.css" rel="stylesheet">
         <link href="css/login.css" rel="stylesheet">
-        <style>
-            body {
-                padding-top: 5px;
-            }
-        </style>
         <script src="js/jquery.js"></script>
         <script src="js/bootstrap.min.js"></script>
 
@@ -50,7 +45,7 @@
                     <div class="control-group">
                         <label class="control-label" for="entrar"></label>
                         <div class="controls">
-                            <mtw:submit name="entrar" klass="btn btn-primary" value="Entrar" />
+                            <mtw:submit name="entrar" klass="btn btn-primary" value="Entrar"/>
                         </div>
                     </div>
                 </fieldset>

@@ -1,14 +1,25 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="../../WEB-INF/imports.jspf"%>
 
+<header>
+    <style>
+        .burger b{width:21px;height:4px;border-radius:2px;display:block;background:#000000;margin-bottom:4px}
+    </style>
+</header>
+
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
-        
+
         <a class="brand" href="Inicio.mtw">ClearTrip</a>
 
         <div class="btn-group">
             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                MENU <span class="caret"></span>
+                <div class="burger">
+                    <b></b>
+                    <b></b>
+                    <b></b>
+                </div>
+                
             </button>
             <ul class="dropdown-menu" role="menu">
                 <li><mtw:hasAuthorization permission="Usuario"><a href="UsuarioRead.mtw">Usuários</a></mtw:hasAuthorization></li>
