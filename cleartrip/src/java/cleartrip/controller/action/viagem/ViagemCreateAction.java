@@ -22,26 +22,29 @@ public class ViagemCreateAction extends BaseAction {
 
         try {
 
-            form.put("meioTransporte.id", input.getString("meioTransporte.id"));
-            form.put("Usuario.id", input.getString("Usuario.id"));
+            form.put("meioTransporte.id", input.getLong("meioTransporte.id"));
+            form.put("Usuario.id", input.getLong("Usuario.id"));
             form.put("status", input.getString("status"));
-            form.put("destino", input.getLong("destino"));
+            form.put("destino", input.getString("destino"));
             form.put("motivo", input.getString("motivo"));
-            form.put("enderecoDestino", input.getLong("enderecoDestino"));
+            form.put("enderecoDestino", input.getString("enderecoDestino"));
             form.put("telefoneDestino", input.getString("telefoneDestino"));
             form.put("outrosMateriais", input.getString("outrosMateriais"));
             form.put("cidadePartida", input.getString("cidadePartida"));
             form.put("enderecoPartida", input.getString("enderecoPartida"));
             form.put("telefonePartida", input.getString("telefonePartida"));
-            form.put("dataPartida", input.getString("dataPartida"));
+            form.put("dataPartida", input.getDate("dataPartida"));
+            
             form.put("horaPartida", input.getString("horaPartida"));
             form.put("aeroportoPartida", input.getString("aeroportoPartida"));
             form.put("ciaAereaIda", input.getString("ciaAereaIda"));
             form.put("numeroVooIda", input.getString("numeroVooIda"));
-            form.put("dataCompromisso", input.getString("dataCompromisso"));
+            form.put("dataCompromisso", input.getDate("dataCompromisso"));
+            
             form.put("horaCompromisso", input.getString("horaCompromisso"));
-            form.put("dataVolta", input.getString("dataVolta"));
-            form.put("horaVolta", input.getString("horaVolta"));
+            form.put("dataVolta", input.getDate("dataVolta"));
+            //Verificar
+            form.put("horaVolta", input.getDate("horaVolta"));
             form.put("aeroportoVolta", input.getString("aeroportoVolta"));
             form.put("ciaAereaVolta", input.getString("ciaAereaVolta"));
             form.put("numeroVooVolta", input.getString("numeroVooVolta"));
@@ -51,8 +54,8 @@ public class ViagemCreateAction extends BaseAction {
             form.put("numeroReciboAdiantamento", input.getString("numeroReciboAdiantamento"));
             form.put("numeroReciboResssarcimento", input.getString("numeroReciboResssarcimento"));
             form.put("relatoViagem", input.getString("relatoViagem"));
-            form.put("dataAprovacao", input.getString("dataAprovacao"));
-            form.put("dataEncerramento", input.getString("dataEncerramento"));
+            form.put("dataAprovacao", input.getDate("dataAprovacao"));
+            form.put("dataEncerramento", input.getDate("dataEncerramento"));
             
             error = ServiceLocator.getViagemService().validateForCreate(form);
 

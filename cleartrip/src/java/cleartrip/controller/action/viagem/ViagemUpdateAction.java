@@ -18,8 +18,8 @@ public class ViagemUpdateAction extends BaseAction {
         String consequence = ERROR;
         //Montando o mapa
         Map<String, Object> form = new HashMap<String, Object>();
-            form.put("meioTransporte.id", input.getString("viagem.meioTransporte.id"));
-            form.put("usuario.id", input.getString("viagem.Usuario.id"));
+            form.put("meioTransporte.id", input.getLong("viagem.meioTransporte.id"));
+            form.put("usuario.id", input.getLong("viagem.Usuario.id"));
             form.put("status", input.getString("viagem.status"));
             form.put("destino", input.getLong("viagem.destino"));
             form.put("motivo", input.getString("viagem.motivo"));
@@ -29,14 +29,17 @@ public class ViagemUpdateAction extends BaseAction {
             form.put("cidadePartida", input.getString("viagem.cidadePartida"));
             form.put("enderecoPartida", input.getString("viagem.enderecoPartida"));
             form.put("telefonePartida", input.getString("viagem.telefonePartida"));
-            form.put("dataPartida", input.getString("viagem.dataPartida"));
+            form.put("dataPartida", input.getDate("viagem.dataPartida"));
+            
             form.put("horaPartida", input.getString("viagem.horaPartida"));
             form.put("aeroportoPartida", input.getString("viagem.aeroportoPartida"));
             form.put("ciaAereaIda", input.getString("viagem.ciaAereaIda"));
             form.put("numeroVooIda", input.getString("viagem.numeroVooIda"));
-            form.put("dataCompromisso", input.getString("viagem.dataCompromisso"));
+            form.put("dataCompromisso", input.getDate("viagem.dataCompromisso"));
+            
             form.put("horaCompromisso", input.getString("viagem.horaCompromisso"));
-            form.put("dataVolta", input.getString("viagem.dataVolta"));
+            form.put("dataVolta", input.getDate("viagem.dataVolta"));
+            
             form.put("horaVolta", input.getString("viagem.horaVolta"));
             form.put("aeroportoVolta", input.getString("viagem.aeroportoVolta"));
             form.put("ciaAereaVolta", input.getString("viagem.ciaAereaVolta"));
@@ -47,8 +50,8 @@ public class ViagemUpdateAction extends BaseAction {
             form.put("numeroReciboAdiantamento", input.getString("viagem.numeroReciboAdiantamento"));
             form.put("numeroReciboResssarcimento", input.getString("viagem.numeroReciboResssarcimento"));
             form.put("relatoViagem", input.getString("viagem.relatoViagem"));
-            form.put("dataAprovacao", input.getString("viagem.dataAprovacao"));
-            form.put("dataEncerramento", input.getString("viagem.dataEncerramento"));
+            form.put("dataAprovacao", input.getDate("viagem.dataAprovacao"));
+            form.put("dataEncerramento", input.getDate("viagem.dataEncerramento"));
 
         //Validando
         Map<String, String> error = ServiceLocator.getViagemService().validateForUpdate(form);

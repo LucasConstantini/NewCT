@@ -15,13 +15,14 @@ public class UsuarioUpdateAction extends BaseAction {
         //Montando o mapa
         Map<String, Object> form = new HashMap<String, Object>();
             form.put("nome", input.getString("usuario.nome"));
-            form.put("login", input.getString("usuario.login"));
+            form.put("empresa.id", input.getString("usuario.empresa.id"));
             form.put("senha", input.getString("usuario.senha"));
+            form.put("cpf", input.getString("usuario.cpf"));
+            form.put("rg", input.getString("usuario.rg"));
             form.put("emailCorporativo", input.getString("usuario.emailcorporativo"));
             form.put("emailPessoal", input.getString("usuario.emailpessoal"));
             form.put("telCorporativo", input.getString("usuario.telefonecorporativo"));
             form.put("telefonePessoal", input.getString("usuario.telefonepessoal"));
-            form.put("tipo", input.getString("usuario.tipo"));
 
         Usuario usuario = (Usuario) session().getAttribute("usuarioLogado");
         if (usuario.getLogin() == input.getString("usuario.login")) {
