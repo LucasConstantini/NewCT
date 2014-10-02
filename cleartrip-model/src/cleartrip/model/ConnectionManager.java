@@ -17,7 +17,7 @@ public class ConnectionManager {
         source.setPortNumber(5432);
         source.setDatabaseName("cleartrip");
         source.setUser("postgres");
-        source.setPassword("adwsda468564");
+        source.setPassword("postgres");
         source.setMaxConnections(30);
         source.setInitialConnections(10);
         source.setTcpKeepAlive(true);
