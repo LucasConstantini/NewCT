@@ -37,8 +37,8 @@ public class ViagemService implements BaseViagemService {
         boolean ok = true;
         SimpleDateFormat formatoHora = new SimpleDateFormat("H:mm");
         if (properties != null) {
-            String transsporte = (String) properties.get("transporte");
-            String usuario = (String) properties.get("usuario");
+            Long idTransporte = (Long) properties.get("transporte.id");
+            Long idUsuario = (Long) properties.get("usuario.id");
             String status = (String) properties.get("status");
             String destino = (String) properties.get("destino");
             String enderecoDestivo = (String) properties.get("enderecoDestino");
@@ -51,11 +51,11 @@ public class ViagemService implements BaseViagemService {
             Date dataVolta = (Date) properties.get("dataVolta");
             Time horaVolta = (Time) properties.get("horaVolta");
 
-            if (transsporte == null || transsporte.isEmpty()) {
+            if (idTransporte == null || idTransporte<0) {
                 errors.put("transporte", "Campo obrigatório!");
                 ok = false;
             }
-            if (usuario == null || usuario.isEmpty()) {
+            if (idUsuario == null || idUsuario<0) {
                 errors.put("usuario", "Campo obrigatório!");
                 ok = false;
             }
@@ -132,7 +132,7 @@ public class ViagemService implements BaseViagemService {
                 Map<String, Object> criteria = new HashMap<String, Object>();
                 criteria.put(ViagemDAO.CRITERION_DATA_PARTIDA_INICIO_EQ, dataPartida);
                 criteria.put(ViagemDAO.CRITERION_DATA_PARTIDA_FIM_EQ, dataVolta);
-                criteria.put(ViagemDAO.CRITERION_USUARIO_EQ, usuario);
+                criteria.put(ViagemDAO.CRITERION_USUARIO_EQ, idUsuario);
                 criteria.put(ViagemDAO.CRITERION_STATUS_EQ, status);
                 List<Viagem> viagens = readByCriteria(criteria);
                 if (!viagens.isEmpty()){

@@ -64,25 +64,20 @@ public class UsuarioService implements BaseUsuarioService {
 Map<String, String> errors = new HashMap<String, String>();
         if (properties != null) {
             String nome = (String) properties.get("nome");
-            String login = (String) properties.get("login");
             String senha = (String) properties.get("senha");
-            String nomeEmpresa = (String) properties.get("empresa");
+            Long idEmpresa = (Long) properties.get("empresa.id");
             String cpf = (String) properties.get("cpf");
             String rg = (String) properties.get("rg");
             String emailCorportivo = (String) properties.get("emailCorportivo");
-            String tipo = (String) properties.get("tipo");
 
             if (nome == null || nome.isEmpty()) {
                 errors.put("nome", "Campo obrigatório!");
             }
-            if (login == null || login.isEmpty()) {
-                errors.put("login", "Campo obrigatório!");
-            }
             if (senha == null || senha.isEmpty()) {
                 errors.put("senha", "Campo obrigatório!");
             }
-            if (nomeEmpresa == null || nomeEmpresa.isEmpty()) {
-                errors.put("empresa", "Campo Obrigatório, digite o nome da empresa!");
+            if (idEmpresa == null || idEmpresa<0) {
+                errors.put("empresa", "Campo Obrigatório!");
             }
             if (cpf == null || senha.isEmpty()) {
                 errors.put("cpf", "Campo obrigatório!");
@@ -92,9 +87,6 @@ Map<String, String> errors = new HashMap<String, String>();
             }
             if (emailCorportivo == null || emailCorportivo.isEmpty()) {
                 errors.put("emailCorportivo", "Campo obrigatório!");
-            }
-            if (tipo == null || tipo.isEmpty()) {
-                errors.put("tipo", "Campo obrigatório!");
             }
         }
         return errors;
