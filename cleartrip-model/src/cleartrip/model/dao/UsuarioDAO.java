@@ -173,9 +173,15 @@ public class UsuarioDAO implements BaseDAO<Usuario> {
         ps.setString(++i, e.getTipo());
         ps.setString(++i, e.getSenha());
         ps.setString(++i, e.getNome());
+        ps.setLong(++i, e.getCpf());
+        ps.setString(++i, e.getRg());
         ps.setString(++i, e.getEmailCorporativo());
-        ps.setString(++i, e.getTelefoneCorporativo());
         //para campos não obrigatórios 
+        if(e.getTelefoneCorporativo() != null){
+            ps.setString(++i, e.getTelefoneCorporativo());
+        } else{
+            ps.setNull(++i, Types.VARCHAR);
+        }
         if (e.getEmailPessoal() != null) {
             ps.setString(++i, e.getEmailPessoal());
         } else {
