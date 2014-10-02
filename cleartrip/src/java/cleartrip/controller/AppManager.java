@@ -134,6 +134,7 @@ public class AppManager extends ApplicationManager {
 
         ac = new ActionConfig("UsuarioDelete", UsuarioDeleteAction.class);
         ac.addConsequence(SUCCESS, new Redirect("UsuarioRead.mtw"));
+        ac.addConsequence(ERROR, new Forward("UsuarioRead.mtw"));
         ac.addFilter(new AuthorizationFilter(new Permission("Usuario")));
         this.add(ac);
         

@@ -26,7 +26,7 @@
             <display:column property="id" sortName="id" sortable="true" title="Código" style="width:20%;"/>
             <display:column property="nome" sortable="true" title="Nome" style="width:50%;"/>
             <display:column value="<img src='img/editar.png'alt='Editar'>" href="TransporteShowForm.mtw" paramId="id" paramProperty="id" style="width:15%;"/>
-            <display:column value="<img src='img/lixeira.png'alt='Excluir'>" href="TransporteDelete.mtw"  paramId="id" paramProperty="id" style="width:15%;"/>
+            <display:column value="<img src='img/lixeira.png'alt='Excluir'>" href="TransporteDelete.mtw"  paramId="id" paramProperty="id" class="deleteLink" style="width:15%;"/>
         </display:table>
     </div>
 </div>
@@ -56,16 +56,6 @@
             $("#confirmDelete .btn-danger").attr("href", $(this).attr("href"));
             return false;
         });
-        if ($('#mensagemErro').val()) {
-            $('#excessaoDelete').modal('show');
-
-        }
-        ;
-        if ($('#mensagemErroAdm').val()) {
-            $('#excessaoDeleteAdm').modal('show');
-
-        }
-        ;
         $('#botaoOk').click(function() {
             $('#mensagemErro').val('');
 

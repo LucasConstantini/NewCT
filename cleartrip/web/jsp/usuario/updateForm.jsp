@@ -17,7 +17,8 @@
         <label for="inputNome">Nome</label>
         <div>
             <mtw:input type="text" id="inputNome" name="usuario.nome"/>
-            <span class="label label-important">${error.nome}</span>
+            <span class="label label-important">${error.nome}</span> <br />
+            <input type="text" id="tipoUsuario" value="${usuario.tipo}" disabled=""/>
         </div>
     </div>
     <br />
@@ -42,16 +43,7 @@
         </div>
     </div>
     <br />
-    <div class="control-group">
-        <label class="control-label" for="inputTipo">Tipo *</label>
-        <div class="controls">
-            <select value="usuario.tipo">
-                <option value="Financeiro">Financeiro</option>
-                <option value="Solicitante">Solicitante</option>
-            </select>
-            
-        </div>
-    </div>
+    
     <br />
     <div>
         <label for="inputEmailPessoal">Email Pessoal:</label>
