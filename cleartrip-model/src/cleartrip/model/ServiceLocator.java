@@ -6,12 +6,14 @@ import cleartrip.model.base.service.BaseFinanceiroService;
 import cleartrip.model.base.service.BaseSolicitanteService;
 import cleartrip.model.base.service.BaseTransporteService;
 import cleartrip.model.base.service.BaseUsuarioService;
+import cleartrip.model.base.service.BaseViagemService;
 import cleartrip.model.service.AdministradorService;
 import cleartrip.model.service.EmpresaService;
 import cleartrip.model.service.FinanceiroService;
 import cleartrip.model.service.SolicitanteService;
 import cleartrip.model.service.TransporteService;
 import cleartrip.model.service.UsuarioService;
+import cleartrip.model.service.ViagemService;
 
 public class ServiceLocator {
 
@@ -36,6 +38,10 @@ public class ServiceLocator {
     }
     public static BaseEmpresaService getEmpresaService() {
         return new EmpresaService();
+    }
+    
+    public static BaseViagemService getViagemService(){
+        return new ViagemService();
     }
     
 }
