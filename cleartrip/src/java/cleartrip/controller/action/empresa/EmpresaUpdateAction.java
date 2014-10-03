@@ -21,6 +21,7 @@ public class EmpresaUpdateAction extends BaseAction {
         form.put("nomeRepresentante", input.getString("empresa.nomeRepresentante"));
         form.put("cpfRepresentante", input.getLong("empresa.cpfRepresentante"));
         form.put("cnpj", input.getLong("empresa.cnpj"));
+    
         //Validando
         Map<String, String> error = ServiceLocator.getTransporteService().validateForUpdate(form);
         if (error == null || error.isEmpty()) {

@@ -126,8 +126,8 @@ public class AppManager extends ApplicationManager {
         ac.addFilter(new AuthorizationFilter(new Permission("Usuario")));
         this.add(ac);
 
-        ac = new ActionConfig("UsuarioUpdate", UsuarioUpdateAction.class);
-        ac.addConsequence(SUCCESS, new Redirect("UsuarioRead.mtw"));
+        ac = new ActionConfig("UsuarioUpdate", UsuarioUpdateAction.class);        
+        ac.addConsequence(SUCCESS, new Redirect("UsuarioRead.mtw"));     
         ac.addConsequence(ERROR, new Forward("jsp/usuario/updateForm.page"));
         ac.addFilter(new AuthorizationFilter(new Permission("Usuario")));
         this.add(ac);
