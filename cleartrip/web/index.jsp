@@ -45,7 +45,7 @@
                     <div class="control-group">
                         <label class="control-label" for="entrar"></label>
                         <div class="controls">
-                            <mtw:submit name="entrar" klass="btn btn-primary" value="Entrar"/>
+                            <button type="submit" name="entrar" class="btn btn-primary">Entrar</button>
                         </div>
                     </div>
                 </fieldset>
