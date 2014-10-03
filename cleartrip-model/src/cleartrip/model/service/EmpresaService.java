@@ -70,7 +70,7 @@ public class EmpresaService implements BaseEmpresaService {
             conn.close();
         } catch (Exception e) {
             conn.rollback();
-            conn.close();
+            conn.close();   
             throw e;
         }
     }

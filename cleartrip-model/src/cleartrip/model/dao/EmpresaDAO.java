@@ -87,7 +87,7 @@ public class EmpresaDAO implements BaseDAO<Empresa> {
 
     @Override
     public void update(Empresa e, Connection conn) throws Exception {
-        String sql = "UPDATE curso SET nome=?, nomefantasia=?, endereco=?, telefone=?, nomerepresentante=?, cpfrepresentante=?, cnpj=? WHERE id=?;";
+        String sql = "UPDATE empresa SET nome=?, nomefantasia=?, endereco=?, telefone=?, nomerepresentante=?, cpfrepresentante=?, cnpj=? WHERE id=?;";
         PreparedStatement ps = conn.prepareStatement(sql);
         int i = 0;
         ps.setString(++i, e.getNome());
