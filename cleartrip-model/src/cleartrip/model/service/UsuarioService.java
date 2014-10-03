@@ -66,7 +66,7 @@ Map<String, String> errors = new HashMap<String, String>();
             String nome = (String) properties.get("nome");
             String senha = (String) properties.get("senha");
             Long idEmpresa = (Long) properties.get("empresa.id");
-            String cpf = (String) properties.get("cpf");
+            Long cpf = (Long) properties.get("cpf");
             String rg = (String) properties.get("rg");
             String emailCorportivo = (String) properties.get("emailCorportivo");
 
@@ -79,10 +79,10 @@ Map<String, String> errors = new HashMap<String, String>();
             if (idEmpresa == null || idEmpresa<0) {
                 errors.put("empresa", "Campo Obrigatório!");
             }
-            if (cpf == null || senha.isEmpty()) {
+            if (cpf == null || cpf<0) {
                 errors.put("cpf", "Campo obrigatório!");
             }
-            if (rg == null || senha.isEmpty()) {
+            if (rg == null || rg.isEmpty()) {
                 errors.put("rg", "Campo obrigatório!");
             }
             if (emailCorportivo == null || emailCorportivo.isEmpty()) {

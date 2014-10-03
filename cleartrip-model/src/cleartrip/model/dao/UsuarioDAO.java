@@ -166,10 +166,10 @@ public class UsuarioDAO implements BaseDAO<Usuario> {
 
     @Override
     public void update(Usuario e, Connection conn) throws Exception {
-        String sql = "UPDATE usuario SET tipo=?,senha=?,nome=?,cpf=?,rg=?,email_corporativo=?,telefone_corporativo=?,email_pessoal=?,telefone_pessoal=?, empresa_fk=? WHERE login=?;";
+        String sql = "UPDATE usuario SET login=? tipo=?,senha=?,nome=?,cpf=?,rg=?,email_corporativo=?,telefone_corporativo=?,email_pessoal=?,telefone_pessoal=?, empresa_fk=? WHERE id=?;";
         PreparedStatement ps = conn.prepareStatement(sql);
         int i = 0;
-
+        ps.setString(++i, e.getLogin());
         ps.setString(++i, e.getTipo());
         ps.setString(++i, e.getSenha());
         ps.setString(++i, e.getNome());
@@ -194,7 +194,7 @@ public class UsuarioDAO implements BaseDAO<Usuario> {
         }
         ps.setLong(++i, e.getEmpresa().getId());
 
-        ps.setString(++i, e.getLogin());
+        ps.setLong(++i, e.getId());
         ps.execute();
         ps.close();
     }
