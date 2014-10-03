@@ -26,6 +26,7 @@ public class EmpresaUpdateAction extends BaseAction {
         if (error == null || error.isEmpty()) {
             //Monto o pojo
             Empresa empresa = new Empresa();
+            empresa.setId((Long) form.get("id"));
             empresa.setNome((String) form.get("nome"));
             empresa.setNomeFantasia((String) form.get("nomeFantasia"));
             empresa.setEndereco((String) form.get("endereco"));
