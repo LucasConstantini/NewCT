@@ -46,7 +46,7 @@
         </div>
         <div>
             <div>
-                <button type="submit">Confirmar</button>
+                <button type="submit" name="entrar" class="btn btn-success">Confirmar</button>
             </div>
         </div>
     </mtw:form>
