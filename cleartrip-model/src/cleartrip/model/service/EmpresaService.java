@@ -1,6 +1,7 @@
 package cleartrip.model.service;
 
 import cleartrip.model.ConnectionManager;
+import cleartrip.model.ServiceLocator;
 import cleartrip.model.base.service.BaseEmpresaService;
 import cleartrip.model.dao.EmpresaDAO;
 import cleartrip.model.pojo.Empresa;
@@ -94,6 +95,7 @@ public class EmpresaService implements BaseEmpresaService {
     public Map<String, String> validateForCreate(Map<String, Object> properties) throws Exception {
         Map<String, String> errors = new HashMap<String, String>();
         if (properties != null) {
+            Long id = (Long) properties.get("id");
             String nome = (String) properties.get("nome");
             String nomeFantasia = (String) properties.get("nomeFantasia");
             String endereco = (String) properties.get("endereco");
@@ -125,7 +127,12 @@ public class EmpresaService implements BaseEmpresaService {
             if (cpfRepresentante < 0) {
                 errors.put("cpfRepresentante", "Informe o CPF do representante!");
             }
-            
+            Map<String, Object> criteria = new HashMap<>();
+            criteria.put(EmpresaDAO.CRITERION_CPF_REPRESENTANTE, properties.get("cpfRepresentante"));
+            List<Empresa> empresas = ServiceLocator.getEmpresaService().readByCriteria(criteria);
+            if (!empresas.isEmpty()) {
+                errors.put("cpfRepresentante", "Este CPF já representa Outra Empresa!");
+            }
             if (cnpj < 0) {
                 errors.put("cnpj", "Informe o CNPJ da empresa!");
             }

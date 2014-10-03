@@ -145,11 +145,11 @@ Map<String, String> errors = new HashMap<String, String>();
     }
 
     @Override
-    public void delete(Long login) throws Exception {
+    public void delete(Long id) throws Exception {
         Connection conn = ConnectionManager.getInstance().getConnection();
         try {
             UsuarioDAO dao = new UsuarioDAO();
-            dao.delete(login, conn);
+            dao.delete(id, conn);
             conn.commit();
         } catch (Exception e) {
             conn.rollback();
