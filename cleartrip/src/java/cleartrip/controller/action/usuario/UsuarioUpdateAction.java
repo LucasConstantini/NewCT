@@ -14,10 +14,11 @@ public class UsuarioUpdateAction extends BaseAction {
         String consequence = ERROR;
         //Montando o mapa
         Map<String, Object> form = new HashMap<String, Object>();
+            form.put("id", input.getString("usuario.id"));
             form.put("nome", input.getString("usuario.nome"));
-            form.put("empresa.id", input.getString("usuario.empresa.id"));
+            form.put("empresa.id", input.getLong("usuario.empresa.id"));
             form.put("senha", input.getString("usuario.senha"));
-            form.put("cpf", input.getString("usuario.cpf"));
+            form.put("cpf", input.getLong("usuario.cpf"));
             form.put("rg", input.getString("usuario.rg"));
             form.put("emailCorporativo", input.getString("usuario.emailcorporativo"));
             form.put("emailPessoal", input.getString("usuario.emailpessoal"));
@@ -38,6 +39,7 @@ public class UsuarioUpdateAction extends BaseAction {
         if (error == null || error.isEmpty()) {
             //Monto o pojo
             usuario = new Usuario();
+            usuario.setNome((String) form.get("id"));
             usuario.setNome((String) form.get("nome"));
             usuario.setLogin((String) form.get("login"));
             usuario.setSenha((String) form.get("senha"));

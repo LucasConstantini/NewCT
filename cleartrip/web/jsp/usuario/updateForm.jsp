@@ -9,6 +9,7 @@
 </head>
 <mtw:form klass="form-horizontal blocoExterno" action="UsuarioUpdate.mtw" method="post">
     <mtw:input type="hidden" name="usuario.id"/>
+    <mtw:input name="usuario.login" type="hidden"/>
     <div>
         <legend>Alterar Usuario</legend>
     </div>
@@ -18,14 +19,14 @@
         <div>
             <mtw:input type="text" id="inputNome" name="usuario.nome"/>
             <span class="label label-important">${error.nome}</span> <br />
-            <input type="text" id="tipoUsuario" value="${usuario.tipo}" disabled=""/>
+            <mtw:input type="text" id="tipoUsuario" value="${usuario.tipo}" name="usuario.tipo"/>
         </div>
     </div>
     <br />
     <div>
         <label for="inputEmpresa">Empresa</label>
         <div>
-            <mtw:input type="text" id="inputEmpresa" name="usuario.empresa.nome"/>
+            <mtw:input type="text" id="inputEmpresa" value="usuario.empresa.id" name="usuario.empresa.nome"/>
         </div>
     </div>
     <br />
@@ -87,19 +88,8 @@
 
 <script>
     $(function() {
-        var tipo = $('#tipoUsuario').val();
-        if (tipo == "Administrador") {
-            $('#tipo').attr('disabled', 'disabled');
-        } else {
-            $('#tipo option').each(function() {
-                if ($(this).val() == tipo) {
-                    $(this).attr('selected', true);
-                }
-            });
-        }
-
+        $('#tipoUsuario').attr('disabled', 'disabled');
         $('#inputLogin').addClass('hide');
-        $('#loginDesabilitado').attr('value', $('#inputLogin').val()).removeClass('hide').attr('disabled', 'disabled');
     });
 </script>
 
