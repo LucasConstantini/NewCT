@@ -11,8 +11,10 @@ import java.util.List;
 import java.util.Map;
 
 public class EmpresaDAO implements BaseDAO<Empresa> {
+
     public static final String CRITERION_NOME_I_LIKE = "1";
-    
+    public static final String CRITERION_CPF_REPRESENTANTE = "2";
+
     @Override
     public void create(Empresa e, Connection conn) throws Exception {
         String slq = "INSERT INTO empresa(nome, nomefantasia, endereco, telefone, nomerepresentante, cpfrepresentante, cnpj) VALUES(?,?,?,?,?,?,?) RETURNING id;";
@@ -20,9 +22,9 @@ public class EmpresaDAO implements BaseDAO<Empresa> {
         int i = 0;
         ps.setString(++i, e.getNome());
         ps.setString(++i, e.getNomeFantasia());
-        ps.setString(++i, e.getNomeRepresentante());
         ps.setString(++i, e.getEndereco());
         ps.setString(++i, e.getTelefone());
+        ps.setString(++i, e.getNomeRepresentante());
         ps.setLong(++i, e.getCpfRepresentante());
         ps.setLong(++i, e.getCnpj());
         ResultSet rs = ps.executeQuery();
@@ -64,6 +66,11 @@ public class EmpresaDAO implements BaseDAO<Empresa> {
         String criterionNomeILike = (String) criteria.get(CRITERION_NOME_I_LIKE);
         if (criterionNomeILike != null && !criterionNomeILike.trim().isEmpty()) {
             sql += " AND nome ILIKE '%" + criterionNomeILike + "%'";
+        }
+        
+        Long criterionCpfRepresentante = (Long) criteria.get(CRITERION_CPF_REPRESENTANTE);
+        if (criterionCpfRepresentante != null) {
+            sql += " AND cpfrepresentante = '" + criterionCpfRepresentante + "'";
         }
 
         Statement s = conn.createStatement();

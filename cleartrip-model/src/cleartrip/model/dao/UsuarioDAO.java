@@ -193,7 +193,6 @@ public class UsuarioDAO implements BaseDAO<Usuario> {
             ps.setNull(++i, Types.VARCHAR);
         }
         ps.setLong(++i, e.getEmpresa().getId());
-
         ps.setLong(++i, e.getId());
         ps.execute();
         ps.close();

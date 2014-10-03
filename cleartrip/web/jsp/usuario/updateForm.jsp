@@ -10,6 +10,7 @@
 <mtw:form klass="form-horizontal blocoExterno" action="UsuarioUpdate.mtw" method="post">
     <mtw:input type="hidden" name="usuario.id"/>
     <mtw:input name="usuario.login" type="hidden"/>
+    <mtw:input type="hidden" id="tipoUsuario" name="usuario.tipo"/>
     <div>
         <legend>Alterar Usuario</legend>
     </div>
@@ -23,10 +24,20 @@
         </div>
     </div>
     <br />
+    <br />
     <div>
-        <label for="inputEmpresa">Empresa</label>
+        <label for="inputSenha">Senha</label>
         <div>
-            <mtw:input type="text" id="inputEmpresa" value="usuario.empresa.id" name="usuario.empresa.nome"/>
+            <mtw:input type="passsword" id="inputSenha" name="usuario.senha"/>
+            <span class="label label-important">${error.senha}</span> <br />
+        </div>
+    </div>
+    <br />
+    <div class="control-group">
+        <label class="control-label" for="inputNome">Empresa</label>
+        <div class="controls">
+            <mtw:select name="usuario.empresa.id" list="empresas" emptyField="true" emptyFieldValue="Selecione..."/>
+            <span class="label label-important">${error.empresa}</span>
         </div>
     </div>
     <br />
@@ -83,7 +94,6 @@
 
         </div>
     </div>
-    <input type="text" id="tipoUsuario" value="${usuario.tipo}" class="hide"/>
 </mtw:form>
 
 <script>

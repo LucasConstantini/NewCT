@@ -7,8 +7,7 @@
         <label for="inputNome">Nome</label>
         <div>
             <mtw:input type="text" id="inputNome" name="transporte.nome"/>
-            <span>${error.nome}</span>
-
+             <span class="label label-important">${error.nome}</span>
         </div>
     </div>
     <br />
