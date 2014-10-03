@@ -166,24 +166,22 @@ public class UsuarioDAO implements BaseDAO<Usuario> {
 
     @Override
     public void update(Usuario e, Connection conn) throws Exception {
-        String sql = "UPDATE usuario SET login=? tipo=?,senha=?,nome=?,cpf=?,rg=?,email_corporativo=?,telefone_corporativo=?,email_pessoal=?,telefone_pessoal=?, empresa_fk=? WHERE id=?;";
+        String sql = "UPDATE usuario SET empresa_fk=?, nome=?, senha=?, cpf=?, rg=?, tipo=?, emailpessoal=?, emailcorporativo=?, telefonepessoal=?, telefonecorporativo=?, login=? WHERE id=?";
         PreparedStatement ps = conn.prepareStatement(sql);
         int i = 0;
-        ps.setString(++i, e.getLogin());
-        ps.setString(++i, e.getTipo());
-        ps.setString(++i, e.getSenha());
+        ps.setLong(++i, e.getEmpresa().getId());
         ps.setString(++i, e.getNome());
+        ps.setString(++i, e.getSenha());
         ps.setLong(++i, e.getCpf());
         ps.setString(++i, e.getRg());
-        ps.setString(++i, e.getEmailCorporativo());
-        //para campos não obrigatórios 
-        if(e.getTelefoneCorporativo() != null){
-            ps.setString(++i, e.getTelefoneCorporativo());
-        } else{
-            ps.setNull(++i, Types.VARCHAR);
-        }
+        ps.setString(++i, e.getTipo());
         if (e.getEmailPessoal() != null) {
             ps.setString(++i, e.getEmailPessoal());
+        } else {
+            ps.setNull(++i, Types.VARCHAR);
+        }
+        if (e.getEmailCorporativo()!= null) {
+            ps.setString(++i, e.getEmailCorporativo());
         } else {
             ps.setNull(++i, Types.VARCHAR);
         }
@@ -192,7 +190,12 @@ public class UsuarioDAO implements BaseDAO<Usuario> {
         } else {
             ps.setNull(++i, Types.VARCHAR);
         }
-        ps.setLong(++i, e.getEmpresa().getId());
+        if(e.getTelefoneCorporativo() != null){
+            ps.setString(++i, e.getTelefoneCorporativo());
+        } else{
+            ps.setNull(++i, Types.VARCHAR);
+        }
+        ps.setString(++i, e.getLogin());
         ps.setLong(++i, e.getId());
         ps.execute();
         ps.close();

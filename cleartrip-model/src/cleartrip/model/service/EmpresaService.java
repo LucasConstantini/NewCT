@@ -30,10 +30,10 @@ public class EmpresaService implements BaseEmpresaService {
     @Override
     public Empresa readById(Long id) throws Exception {
         Connection conn = ConnectionManager.getInstance().getConnection();
-        Empresa curso = null;
+        Empresa empresa = null;
         try {
             EmpresaDAO dao = new EmpresaDAO();
-            curso = dao.readById(id, conn);
+            empresa = dao.readById(id, conn);
             conn.commit();
             conn.close();
         } catch (Exception e) {
@@ -41,7 +41,7 @@ public class EmpresaService implements BaseEmpresaService {
             conn.close();
             throw e;
         }
-        return curso;
+        return empresa;
     }
 
     @Override

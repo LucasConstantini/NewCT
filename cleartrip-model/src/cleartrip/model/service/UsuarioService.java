@@ -65,10 +65,10 @@ Map<String, String> errors = new HashMap<String, String>();
         if (properties != null) {
             String nome = (String) properties.get("nome");
             String senha = (String) properties.get("senha");
-            Long idEmpresa = (Long) properties.get("empresa.id");
+            Long idEmpresa = (Long)properties.get("empresa.id");
             Long cpf = (Long) properties.get("cpf");
             String rg = (String) properties.get("rg");
-            String emailCorportivo = (String) properties.get("emailCorportivo");
+            String emailCorportivo = (String) properties.get("emailCorporativo");
 
             if (nome == null || nome.isEmpty()) {
                 errors.put("nome", "Campo obrigatório!");
