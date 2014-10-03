@@ -16,9 +16,9 @@
         </div>
     </div>
     <div class="control-group">
-        <label class="control-label" for="inputNome">Empresa</label>
+        <label class="control-label" for="inputEmpresa">Empresa</label>
         <div class="controls">
-            <mtw:select name="empresa.id" list="empresas" emptyField="true" emptyFieldValue="Selecione..."/>
+            <mtw:select id="inputEmpresa" name="empresa.id" list="empresas" emptyField="true" emptyFieldValue="Selecione..."/>
             <span class="label label-important">${error.empresa}</span>
         </div>
     </div>

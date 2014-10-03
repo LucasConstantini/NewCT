@@ -9,6 +9,7 @@
             <label for="inputNome">Nome</label>
             <div>
                 <mtw:input type="text" id="inputNome" name="nome"/>
+                 <span class="label label-important">${error.nome}</span>
             </div>
         </div>
         <div>
@@ -17,4 +18,3 @@
             </div>
         </div>
     </mtw:form>
-</div>
