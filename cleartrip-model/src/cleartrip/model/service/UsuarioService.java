@@ -26,7 +26,6 @@ public class UsuarioService implements BaseUsuarioService {
             List<Usuario> usuarios = dao.readByCriteria(criteria, conn);
 
             if (usuarios != null && usuarios.size() == 1) {
-                System.out.println("cheguei aqui");
                 usuarioLogado = usuarios.get(0);
                 if (!usuarioLogado.getLogin().equals(usuario)) {
                     usuarioLogado = null;
