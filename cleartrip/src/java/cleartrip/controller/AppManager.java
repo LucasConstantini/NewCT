@@ -1,6 +1,7 @@
 package cleartrip.controller;
 
 import cleartrip.controller.action.InicioAction;
+import cleartrip.controller.action.despesa.NewDespesaAction;
 import cleartrip.controller.action.empresa.EmpresaCreateAction;
 import cleartrip.controller.action.empresa.EmpresaDeleteAction;
 import cleartrip.controller.action.empresa.EmpresaReadAction;
@@ -49,6 +50,7 @@ public class AppManager extends ApplicationManager {
         //
         Group solicitante = new Group("Solicitante");
         solicitante.addPermission("Inicio");
+        solicitante.addPermission("Despesa");
         AuthorizationManager.addGroup(solicitante);
         //
         Group administrador = new Group("Administrador");
@@ -77,6 +79,12 @@ public class AppManager extends ApplicationManager {
 
         ac = new ActionConfig("Logout", LogoutAction.class);
         ac.addConsequence(SUCCESS, new Redirect("/"));
+        this.add(ac);
+        
+        //Despesa
+        ac = new ActionConfig("NewDespesa", NewDespesaAction.class);
+        ac.addConsequence(SUCCESS, new Forward("jsp/despesa/sendDespesa.page"));
+        ac.addFilter(new AuthorizationFilter(new Permission("Despesa")));
         this.add(ac);
         
         //Meio de Transporte
