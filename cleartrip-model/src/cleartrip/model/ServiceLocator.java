@@ -3,6 +3,7 @@ package cleartrip.model;
 import cleartrip.model.base.service.BaseAdministradorService;
 import cleartrip.model.base.service.BaseEmpresaService;
 import cleartrip.model.base.service.BaseFinanceiroService;
+import cleartrip.model.base.service.BaseParametroService;
 import cleartrip.model.base.service.BaseSolicitanteService;
 import cleartrip.model.base.service.BaseTransporteService;
 import cleartrip.model.base.service.BaseUsuarioService;
@@ -10,6 +11,7 @@ import cleartrip.model.base.service.BaseViagemService;
 import cleartrip.model.service.AdministradorService;
 import cleartrip.model.service.EmpresaService;
 import cleartrip.model.service.FinanceiroService;
+import cleartrip.model.service.ParametroService;
 import cleartrip.model.service.SolicitanteService;
 import cleartrip.model.service.TransporteService;
 import cleartrip.model.service.UsuarioService;
@@ -42,6 +44,10 @@ public class ServiceLocator {
     
     public static BaseViagemService getViagemService(){
         return new ViagemService();
+    }
+    
+     public static BaseParametroService getParametroService(){
+        return new ParametroService();
     }
     
 }
