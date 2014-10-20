@@ -41,7 +41,7 @@
             <label for="inputMargemDeslocamento">Margem Limite de Deslocamento</label>
             <div>
                 <mtw:input type="text" id="inputMargemDeslocamento" name="margemDeslocamento"/>
-                <span class="label label-important">${error.custoKm}</span>
+                <span class="label label-important">${error.margemDeslocamento}</span>
             </div>
         </div>
 

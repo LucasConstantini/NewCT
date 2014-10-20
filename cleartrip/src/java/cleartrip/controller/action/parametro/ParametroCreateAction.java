@@ -24,15 +24,20 @@ public class ParametroCreateAction extends BaseAction {
 
         try {
 
-            form.put("manha", Time.valueOf(input.getString("manha")));
-            form.put("tarde", Time.valueOf(input.getString("tarde")));
-            form.put("noite", Time.valueOf(input.getString("noite")));
-            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-            Date date = new Date();
-            form.put("dataInicio",dateFormat.format(date));
-            form.put("dataTermino", input.getDate("dataTermino"));
+            String aux = input.getString("manha") + ":00";
+            form.put("manha", Time.valueOf(aux));
+            aux = input.getString("tarde") + ":00";
+            form.put("tarde", Time.valueOf(aux));
+            aux = input.getString("noite") + ":00";
+            form.put("noite", Time.valueOf(aux));
             form.put("custoKm", input.getLong("custoKm"));
             form.put("margemDeslocamento", input.getInt("margemDeslocamento"));
+            form.put("dataTermino", input.getDate("dataTermino"));
+            
+            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            Date date = new Date();
+            form.put("dataInicio",dateFormat.format(date));            
+            
             Usuario usuario = new Usuario();
             usuario = (Usuario) session.getAttribute("usuarioLogado");
             if (usuario != null) {

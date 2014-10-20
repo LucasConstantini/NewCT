@@ -6,8 +6,10 @@ import cleartrip.controller.action.empresa.EmpresaDeleteAction;
 import cleartrip.controller.action.empresa.EmpresaReadAction;
 import cleartrip.controller.action.empresa.EmpresaShowFormAction;
 import cleartrip.controller.action.empresa.EmpresaUpdateAction;
+import cleartrip.controller.action.parametro.ParametroCreateAction;
 import cleartrip.controller.action.parametro.ParametroDeleteAction;
 import cleartrip.controller.action.parametro.ParametroReadAction;
+import cleartrip.controller.action.parametro.ParametroShowFormAction;
 import cleartrip.controller.action.parametro.ParametroUpdateAction;
 import cleartrip.controller.action.transporte.TransporteCreateAction;
 import cleartrip.controller.action.transporte.TransporteDeleteAction;
@@ -178,13 +180,13 @@ public class AppManager extends ApplicationManager {
         ac.addFilter(new AuthorizationFilter(new Permission("Parametro")));
         this.add(ac);
 
-        ac = new ActionConfig("ParametroShowForm", UsuarioShowFormAction.class);
+        ac = new ActionConfig("ParametroShowForm", ParametroShowFormAction.class);
         ac.addConsequence("CREATE", new Forward("jsp/parametro/createForm.page"));
         ac.addConsequence("UPDATE", new Forward("jsp/parametro/updateForm.page"));
         ac.addFilter(new AuthorizationFilter(new Permission("Parametro")));
         this.add(ac);
 
-        ac = new ActionConfig("ParametroCreate", UsuarioCreateAction.class);
+        ac = new ActionConfig("ParametroCreate", ParametroCreateAction.class);
         ac.addConsequence(SUCCESS, new Redirect("ParametroRead.mtw"));
         ac.addConsequence(ERROR, new Forward("jsp/parametro/createForm.page"));
         ac.addFilter(new AuthorizationFilter(new Permission("Parametro")));
