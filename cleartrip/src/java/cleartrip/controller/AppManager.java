@@ -1,12 +1,14 @@
 package cleartrip.controller;
 
 import cleartrip.controller.action.InicioAction;
-import cleartrip.controller.action.despesa.NewDespesaAction;
 import cleartrip.controller.action.empresa.EmpresaCreateAction;
 import cleartrip.controller.action.empresa.EmpresaDeleteAction;
 import cleartrip.controller.action.empresa.EmpresaReadAction;
 import cleartrip.controller.action.empresa.EmpresaShowFormAction;
 import cleartrip.controller.action.empresa.EmpresaUpdateAction;
+import cleartrip.controller.action.parametro.ParametroDeleteAction;
+import cleartrip.controller.action.parametro.ParametroReadAction;
+import cleartrip.controller.action.parametro.ParametroUpdateAction;
 import cleartrip.controller.action.transporte.TransporteCreateAction;
 import cleartrip.controller.action.transporte.TransporteDeleteAction;
 import cleartrip.controller.action.transporte.TransporteReadAction;
@@ -45,12 +47,12 @@ public class AppManager extends ApplicationManager {
         Group financeiro = new Group("Financeiro");
         financeiro.addPermission("Transporte");
         financeiro.addPermission("Empresa");
+        financeiro.addPermission("Parametro");
         financeiro.addPermission("Inicio");
         AuthorizationManager.addGroup(financeiro);
         //
         Group solicitante = new Group("Solicitante");
         solicitante.addPermission("Inicio");
-        solicitante.addPermission("Despesa");
         AuthorizationManager.addGroup(solicitante);
         //
         Group administrador = new Group("Administrador");
@@ -79,12 +81,6 @@ public class AppManager extends ApplicationManager {
 
         ac = new ActionConfig("Logout", LogoutAction.class);
         ac.addConsequence(SUCCESS, new Redirect("/"));
-        this.add(ac);
-        
-        //Despesa
-        ac = new ActionConfig("NewDespesa", NewDespesaAction.class);
-        ac.addConsequence(SUCCESS, new Forward("jsp/despesa/sendDespesa.page"));
-        ac.addFilter(new AuthorizationFilter(new Permission("Despesa")));
         this.add(ac);
         
         //Meio de Transporte
@@ -173,6 +169,37 @@ public class AppManager extends ApplicationManager {
         ac = new ActionConfig("EmpresaDelete", EmpresaDeleteAction.class);
         ac.addConsequence(SUCCESS, new Redirect("EmpresaRead.mtw"));
         ac.addFilter(new AuthorizationFilter(new Permission("Empresa")));
+        this.add(ac);
+        
+         //Parametro
+        ac = new ActionConfig("ParametroRead", ParametroReadAction.class);
+        ac.addConsequence(SUCCESS, new Forward("jsp/parametro/list.page"));
+        ac.addConsequence(ERROR, new Redirect("Inicio.mtw"));
+        ac.addFilter(new AuthorizationFilter(new Permission("Parametro")));
+        this.add(ac);
+
+        ac = new ActionConfig("ParametroShowForm", UsuarioShowFormAction.class);
+        ac.addConsequence("CREATE", new Forward("jsp/parametro/createForm.page"));
+        ac.addConsequence("UPDATE", new Forward("jsp/parametro/updateForm.page"));
+        ac.addFilter(new AuthorizationFilter(new Permission("Parametro")));
+        this.add(ac);
+
+        ac = new ActionConfig("ParametroCreate", UsuarioCreateAction.class);
+        ac.addConsequence(SUCCESS, new Redirect("ParametroRead.mtw"));
+        ac.addConsequence(ERROR, new Forward("jsp/parametro/createForm.page"));
+        ac.addFilter(new AuthorizationFilter(new Permission("Parametro")));
+        this.add(ac);
+
+        ac = new ActionConfig("ParametroUpdate", ParametroUpdateAction.class);        
+        ac.addConsequence(SUCCESS, new Redirect("ParametroRead.mtw"));     
+        ac.addConsequence(ERROR, new Forward("jsp/parametro/updateForm.page"));
+        ac.addFilter(new AuthorizationFilter(new Permission("Parametro")));
+        this.add(ac);
+
+        ac = new ActionConfig("ParametroDelete", ParametroDeleteAction.class);
+        ac.addConsequence(SUCCESS, new Redirect("ParametroRead.mtw"));
+        ac.addConsequence(ERROR, new Forward("ParametroRead.mtw"));
+        ac.addFilter(new AuthorizationFilter(new Permission("Parametro")));
         this.add(ac);
     }
 }
