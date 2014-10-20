@@ -1,7 +1,7 @@
 package cleartrip.model.pojo;
 
 import cleartrip.model.base.BasePOJO;
-import java.sql.Date;
+import java.util.Date;
 import java.sql.Time;
 
 public class Parametro extends BasePOJO {

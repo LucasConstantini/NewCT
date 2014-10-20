@@ -4,6 +4,7 @@ import cleartrip.model.base.BaseDAO;
 import cleartrip.model.pojo.Empresa;
 import cleartrip.model.pojo.Parametro;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -27,9 +28,9 @@ public class ParametroDAO implements BaseDAO<Parametro> {
        
             ps.setTime(++i, e.getNoite());
        
-            ps.setDate(++i, e.getDataTermino());
+            ps.setDate(++i, (Date) e.getDataTermino());
        
-            ps.setDate(++i, e.getDataInicio());
+            ps.setDate(++i, (Date) e.getDataInicio());
         
             ps.setInt(++i, e.getMargemDeslocamento());
         
@@ -121,9 +122,9 @@ public class ParametroDAO implements BaseDAO<Parametro> {
         
             ps.setTime(++i, e.getNoite());
         
-            ps.setDate(++i, e.getDataTermino());
+            ps.setDate(++i, (Date) e.getDataTermino());
         
-            ps.setDate(++i, e.getDataInicio());
+            ps.setDate(++i, (Date) e.getDataInicio());
        
             ps.setInt(++i, e.getMargemDeslocamento());
         
