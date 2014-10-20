@@ -4,8 +4,10 @@ import cleartrip.model.ServiceLocator;
 import cleartrip.model.pojo.Empresa;
 import cleartrip.model.pojo.Parametro;
 import cleartrip.model.pojo.Usuario;
-import java.sql.Date;
+import java.util.Date;
 import java.sql.Time;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 import org.mentawai.core.BaseAction;
@@ -25,22 +27,22 @@ public class ParametroCreateAction extends BaseAction {
             form.put("manha", Time.valueOf(input.getString("manha")));
             form.put("tarde", Time.valueOf(input.getString("tarde")));
             form.put("noite", Time.valueOf(input.getString("noite")));
-            
-            form.put("dataInicio",  );
+            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            Date date = new Date();
+            form.put("dataInicio",dateFormat.format(date));
             form.put("dataTermino", input.getDate("dataTermino"));
             form.put("custoKm", input.getLong("custoKm"));
             form.put("margemDeslocamento", input.getInt("margemDeslocamento"));
             Usuario usuario = new Usuario();
             usuario = (Usuario) session.getAttribute("usuarioLogado");
-            if(usuario != null){
-            form.put("empresa.id", usuario.getEmpresa().getId());
+            if (usuario != null) {
+                form.put("empresa.id", usuario.getEmpresa().getId());
             }
             error = ServiceLocator.getParametroService().validateForCreate(form);
 
         } catch (Exception e) {
 
         }
-
 
         if (error == null || error.isEmpty()) {
             //Monto o pojo
