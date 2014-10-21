@@ -13,6 +13,7 @@
             <ul class="dropdown-menu pull-right" role="menu">
                 <li><mtw:hasAuthorization permission="Usuario"><a href="UsuarioRead.mtw">Usuários</a></mtw:hasAuthorization></li>
                 <li><mtw:hasAuthorization permission="Transporte"><a href="TransporteRead.mtw">Meios de Transporte</a></mtw:hasAuthorization></li>
+                <li><mtw:hasAuthorization permission="Viagem"><a href="ViagemRead.mtw">Viagens</a></mtw:hasAuthorization></li>
                 <li><mtw:hasAuthorization permission="Empresa"><a href="EmpresaRead.mtw">Empresas</a></mtw:hasAuthorization></li>
                 <li><mtw:hasAuthorization permission="Parametro"><a href="ParametroRead.mtw">Parametros</a></mtw:hasAuthorization></li>
                 <li class="divider"></li>

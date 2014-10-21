@@ -14,31 +14,31 @@ public class ViagemShowFormAction extends BaseAction {
 
     @Override
     public String execute() throws Exception {
-        String consequence = "CREATE";
+        String consequence = ERROR;
         Long id = input.getLong("id");
         if (id != null && id > 0) {
-            Viagem viagem = ServiceLocator.getViagemService().readById(id);
-            output.setValue("viagem", viagem);
-            consequence = "UPDATE";
-            this.preload();
+            Usuario user = new Usuario();
+            user = (Usuario) session.getAttribute("usuarioLogado");
+            if (user.getTipo().equals("Financeiro")) {
+                Viagem viagem = ServiceLocator.getViagemService().readById(id);
+                output.setValue("viagem", viagem);
+                consequence = "Financeiro";
+            } else {
+                Viagem viagem = ServiceLocator.getViagemService().readById(id);
+                output.setValue("viagem", viagem);
+                consequence = "Solicitante";
+
+            }
         } else {
-            this.preload();
-        }
+            consequence = "CREATE";
+        }            
+        this.preload();
         return consequence;
     }
 
     private void preload() throws Exception {
         Map<String, Object> criteria = new HashMap<String, Object>();
-        List<Usuario> usuarios = ServiceLocator.getUsuarioService().readByCriteria(criteria);
         List<Transporte> transportes = ServiceLocator.getTransporteService().readByCriteria(criteria);
-        
-        Map<Long, String> usuarioOptions = new LinkedHashMap<Long, String>();
-        for (Usuario usuario : usuarios) {
-            usuarioOptions.put(usuario.getId(), usuario.getNome());
-        }
-
-        output.setValue("usuarios", usuarioOptions);
-        
         Map<Long, String> transporteOptions = new LinkedHashMap<Long, String>();
         for (Transporte transporte : transportes) {
             transporteOptions.put(transporte.getId(), transporte.getNome());

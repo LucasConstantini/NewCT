@@ -2,6 +2,7 @@ package cleartrip.controller.action.viagem;
 
 import cleartrip.model.ServiceLocator;
 import cleartrip.model.dao.ViagemDAO;
+import cleartrip.model.pojo.Usuario;
 import cleartrip.model.pojo.Viagem;
 import java.util.HashMap;
 import java.util.List;
@@ -22,8 +23,19 @@ public class ViagemReadAction extends BaseAction {
         if (status != null && !status.isEmpty()) {
             criteria.put(ViagemDAO.CRITERION_STATUS_EQ, status);
         }
-        List<Viagem> viagens = ServiceLocator.getViagemService().readByCriteria(criteria);
-        output.setValue("lista", viagens);
+
+        Usuario user = new Usuario();
+        user = (Usuario) session.getAttribute("usuarioLogado");
+        if (user.getTipo().equals("Financeiro")) {
+            List<Viagem> viagens = ServiceLocator.getViagemService().readByCriteria(criteria);
+            output.setValue("lista", viagens);
+            consequence = "Financeiro";
+        } else {
+            List<Viagem> viagens = ServiceLocator.getViagemService().readByCriteria(criteria);
+            output.setValue("lista", viagens);
+            consequence = "Solicitante";
+
+        }
         return consequence;
     }
 }

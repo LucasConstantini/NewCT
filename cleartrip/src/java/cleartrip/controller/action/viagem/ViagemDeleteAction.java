@@ -13,7 +13,7 @@ public class ViagemDeleteAction extends BaseAction {
         String consequence = ERROR;
         Map<String, String> erro = new HashMap<String, String>();
         Long id = input.getLong("id");
-        //verificando se é administrador
+        //verificando status.
         Viagem viagem = new Viagem();
         viagem = ServiceLocator.getViagemService().readById(id);
         if (viagem.getStatus().equalsIgnoreCase("Aprovado")) {

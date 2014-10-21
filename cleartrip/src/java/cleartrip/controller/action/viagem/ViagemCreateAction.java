@@ -4,8 +4,6 @@ import cleartrip.model.ServiceLocator;
 import cleartrip.model.pojo.Transporte;
 import cleartrip.model.pojo.Usuario;
 import cleartrip.model.pojo.Viagem;
-import java.sql.Date;
-import java.sql.Time;
 import java.util.HashMap;
 import java.util.Map;
 import org.mentawai.core.BaseAction;
@@ -22,9 +20,11 @@ public class ViagemCreateAction extends BaseAction {
 
         try {
 
-            form.put("meioTransporte.id", input.getLong("meioTransporte.id"));
-            form.put("Usuario.id", input.getLong("Usuario.id"));
-            form.put("status", input.getString("status"));
+            form.put("meioTransporte.id", input.getLong("transporte.id"));
+            Usuario usr = new Usuario();
+            usr = (Usuario) session.getAttribute("usuarioLogado");
+            form.put("usuario.id", usr.getId());
+            form.put("status", "E");
             form.put("destino", input.getString("destino"));
             form.put("motivo", input.getString("motivo"));
             form.put("enderecoDestino", input.getString("enderecoDestino"));
@@ -33,30 +33,20 @@ public class ViagemCreateAction extends BaseAction {
             form.put("cidadePartida", input.getString("cidadePartida"));
             form.put("enderecoPartida", input.getString("enderecoPartida"));
             form.put("telefonePartida", input.getString("telefonePartida"));
-            form.put("dataPartida", input.getDate("dataPartida"));
-            
+            form.put("dataPartida", input.getString("dataPartida"));
             form.put("horaPartida", input.getString("horaPartida"));
-            form.put("aeroportoPartida", input.getString("aeroportoPartida"));
+            form.put("aeroportoIda", input.getString("aeroportoIda"));
             form.put("ciaAereaIda", input.getString("ciaAereaIda"));
             form.put("numeroVooIda", input.getString("numeroVooIda"));
-            form.put("dataCompromisso", input.getDate("dataCompromisso"));
-            
+            form.put("dataCompromisso", input.getString("dataCompromisso"));
             form.put("horaCompromisso", input.getString("horaCompromisso"));
-            form.put("dataVolta", input.getDate("dataVolta"));
-            //Verificar
-            form.put("horaVolta", input.getDate("horaVolta"));
+            form.put("dataVolta", input.getString("dataVolta"));
+            form.put("horaVolta", input.getString("horaVolta"));
             form.put("aeroportoVolta", input.getString("aeroportoVolta"));
             form.put("ciaAereaVolta", input.getString("ciaAereaVolta"));
             form.put("numeroVooVolta", input.getString("numeroVooVolta"));
-            form.put("valorAdiantamento", input.getString("valorAdiantamento"));
-            form.put("valorReembolso", input.getString("valorReembolso"));
-            form.put("valorRessarcimento", input.getString("valorRessarcimento"));
-            form.put("numeroReciboAdiantamento", input.getString("numeroReciboAdiantamento"));
-            form.put("numeroReciboResssarcimento", input.getString("numeroReciboResssarcimento"));
             form.put("relatoViagem", input.getString("relatoViagem"));
-            form.put("dataAprovacao", input.getDate("dataAprovacao"));
-            form.put("dataEncerramento", input.getDate("dataEncerramento"));
-            
+   
             error = ServiceLocator.getViagemService().validateForCreate(form);
 
         } catch (Exception e) {
@@ -70,31 +60,32 @@ public class ViagemCreateAction extends BaseAction {
             viagem.setStatus((String) form.get("status"));
             viagem.setDestino((String) form.get("destino"));
             viagem.setMotivo((String) form.get("motivo"));
-            viagem.setEnderecoDestino((String) form.get("enderecodestino"));
-            viagem.setTelefoneDestino((String) form.get("telefonedestino"));
-            viagem.setOutrosMateriais((String) form.get("outrosmateriais"));
-            viagem.setCidadePartida((String) form.get("cidadepartida"));
-            viagem.setTelefonePartida((String) form.get("telefonepartida"));
-            viagem.setDataPartida((Date) form.get("datapartida"));
-            viagem.setHoraPartida((Time) form.get("horapartida"));
-            viagem.setAeroportoIda((String) form.get("aeroportoida"));
-            viagem.setCiaAereaIda((String) form.get("ciaaereaida"));
-            viagem.setNumeroVooIda((String) form.get("numerovooida"));
-            viagem.setDataCompromisso((Date) form.get("datacompromisso"));
-            viagem.setHoraCompromisso((Time) form.get("horacompromisso"));
-            viagem.setDataVolta((Date) form.get("datavolta"));
-            viagem.setHoraVolta((Time) form.get("horavolta"));
-            viagem.setAeroportoVolta((String) form.get("aeroportovolta"));
-            viagem.setCiaAereaVolta((String) form.get("ciaaereavolta"));
-            viagem.setNumeroVooVolta((String) form.get("numerovoovolta"));
-            viagem.setValorAdiantameto((Double) form.get("valoradiantamento"));
-            viagem.setValorReembolso((Double) form.get("valorreembolso"));
-            viagem.setValorRessarcimento((Double) form.get("valorressarcimento"));
-            viagem.setNumeroReciboAdiantamento((String) form.get("nreciboadiantamento"));
-            viagem.setNumeroReciboRessarcimento((String) form.get("nreciboressarcimento"));
-            viagem.setRelatoViagem((String) form.get("relatoviagem"));
-            viagem.setDataAprovacao((Date) form.get("dataaprovacao"));
-            viagem.setDataEncerramento((Date) form.get("dataencerramento"));
+            viagem.setEnderecoDestino((String) form.get("enderecoDestino"));
+            viagem.setTelefoneDestino((String) form.get("telefoneDestino"));
+            viagem.setOutrosMateriais((String) form.get("outrosMateriais"));
+            viagem.setCidadePartida((String) form.get("cidadePartida"));
+            viagem.setEnderecoPartida((String) form.get("enderecoPartida"));
+            viagem.setTelefonePartida((String) form.get("telefonePartida"));
+            viagem.setDataPartida((String) form.get("dataPartida"));
+            viagem.setHoraPartida((String) form.get("horaPartida"));
+            viagem.setAeroportoIda((String) form.get("aeroportoIda"));
+            viagem.setCiaAereaIda((String) form.get("ciaAereaIda"));
+            viagem.setNumeroVooIda((String) form.get("numeroVooIda"));
+            viagem.setDataCompromisso((String) form.get("dataCompromisso"));
+            viagem.setHoraCompromisso((String) form.get("horaCompromisso"));
+            viagem.setDataVolta((String) form.get("dataVolta"));
+            viagem.setHoraVolta((String) form.get("horaVolta"));
+            viagem.setAeroportoVolta((String) form.get("aeroportoVolta"));
+            viagem.setCiaAereaVolta((String) form.get("ciaAereaVolta"));
+            viagem.setNumeroVooVolta((String) form.get("numeroVooVolta"));
+            viagem.setValorAdiantameto((Double) form.get("valorAdiantamento"));
+            viagem.setValorReembolso((Double) form.get("valorReembolso"));
+            viagem.setValorRessarcimento((Double) form.get("valorRessarcimento"));
+            viagem.setNumeroReciboAdiantamento((String) form.get("nReciboAdiantamento"));
+            viagem.setNumeroReciboRessarcimento((String) form.get("nReciboRessarcimento"));
+            viagem.setRelatoViagem((String) form.get("relatoViagem"));
+            viagem.setDataAprovacao((String) form.get("dataAprovacao"));
+            viagem.setDataEncerramento((String) form.get("dataEncerramento"));
 
             //Set usuario
             Long idUsuario = (Long) form.get("usuario.id");
@@ -102,7 +93,7 @@ public class ViagemCreateAction extends BaseAction {
             viagem.setUsuario(usuario);
             
             //Set meio de transporte
-            Long idTransporte = (Long) form.get("transporte.id");
+            Long idTransporte = (Long) form.get("meioTransporte.id");
             Transporte transporte = ServiceLocator.getTransporteService().readById(idTransporte);
             viagem.setTransporte(transporte);
             

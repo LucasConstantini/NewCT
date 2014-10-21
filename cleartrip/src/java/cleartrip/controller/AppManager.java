@@ -22,6 +22,11 @@ import cleartrip.controller.action.usuario.UsuarioDeleteAction;
 import cleartrip.controller.action.usuario.UsuarioReadAction;
 import cleartrip.controller.action.usuario.UsuarioShowFormAction;
 import cleartrip.controller.action.usuario.UsuarioUpdateAction;
+import cleartrip.controller.action.viagem.ViagemCreateAction;
+import cleartrip.controller.action.viagem.ViagemDeleteAction;
+import cleartrip.controller.action.viagem.ViagemReadAction;
+import cleartrip.controller.action.viagem.ViagemShowFormAction;
+import cleartrip.controller.action.viagem.ViagemUpdateAction;
 import org.mentawai.action.LogoutAction;
 import org.mentawai.authorization.AuthorizationManager;
 import org.mentawai.authorization.Group;
@@ -51,10 +56,12 @@ public class AppManager extends ApplicationManager {
         financeiro.addPermission("Empresa");
         financeiro.addPermission("Parametro");
         financeiro.addPermission("Inicio");
+        financeiro.addPermission("Viagem");
         AuthorizationManager.addGroup(financeiro);
         //
         Group solicitante = new Group("Solicitante");
         solicitante.addPermission("Inicio");
+        solicitante.addPermission("Viagem");
         AuthorizationManager.addGroup(solicitante);
         //
         Group administrador = new Group("Administrador");
@@ -67,7 +74,7 @@ public class AppManager extends ApplicationManager {
     public void loadActions() {
         //Configurar App.
         ActionConfig ac = null;
-        
+
         //Action de Teste
         ac = new ActionConfig("Inicio", InicioAction.class);
         ac.addConsequence(SUCCESS, new Forward("jsp/teste.page"));
@@ -84,25 +91,25 @@ public class AppManager extends ApplicationManager {
         ac = new ActionConfig("Logout", LogoutAction.class);
         ac.addConsequence(SUCCESS, new Redirect("/"));
         this.add(ac);
-        
+
         //Meio de Transporte
         ac = new ActionConfig("TransporteRead", TransporteReadAction.class);
         ac.addConsequence(SUCCESS, new Forward("jsp/transporte/list.page"));
         ac.addFilter(new AuthorizationFilter(new Permission("Transporte")));
         this.add(ac);
-        
+
         ac = new ActionConfig("TransporteShowForm", TransporteShowFormAction.class);
         ac.addConsequence("CREATE", new Forward("jsp/transporte/createForm.page"));
         ac.addConsequence("UPDATE", new Forward("jsp/transporte/updateForm.page"));
         ac.addFilter(new AuthorizationFilter(new Permission("Transporte")));
         this.add(ac);
-        
+
         ac = new ActionConfig("TransporteCreate", TransporteCreateAction.class);
         ac.addConsequence(SUCCESS, new Redirect("TransporteRead.mtw"));
         ac.addConsequence(ERROR, new Forward("jsp/transporte/createForm.page"));
         ac.addFilter(new AuthorizationFilter(new Permission("Transporte")));
         this.add(ac);
-        
+
         ac = new ActionConfig("TransporteUpdate", TransporteUpdateAction.class);
         ac.addConsequence(SUCCESS, new Redirect("TransporteRead.mtw"));
         ac.addConsequence(ERROR, new Forward("jsp/transporte/updateForm.page"));
@@ -113,7 +120,7 @@ public class AppManager extends ApplicationManager {
         ac.addConsequence(SUCCESS, new Redirect("TransporteRead.mtw"));
         ac.addFilter(new AuthorizationFilter(new Permission("Transporte")));
         this.add(ac);
-        
+
         //Usuario
         ac = new ActionConfig("UsuarioRead", UsuarioReadAction.class);
         ac.addConsequence(SUCCESS, new Forward("jsp/usuario/list.page"));
@@ -132,8 +139,8 @@ public class AppManager extends ApplicationManager {
         ac.addFilter(new AuthorizationFilter(new Permission("Usuario")));
         this.add(ac);
 
-        ac = new ActionConfig("UsuarioUpdate", UsuarioUpdateAction.class);        
-        ac.addConsequence(SUCCESS, new Redirect("UsuarioRead.mtw"));     
+        ac = new ActionConfig("UsuarioUpdate", UsuarioUpdateAction.class);
+        ac.addConsequence(SUCCESS, new Redirect("UsuarioRead.mtw"));
         ac.addConsequence(ERROR, new Forward("jsp/usuario/updateForm.page"));
         ac.addFilter(new AuthorizationFilter(new Permission("Usuario")));
         this.add(ac);
@@ -143,7 +150,7 @@ public class AppManager extends ApplicationManager {
         ac.addConsequence(ERROR, new Forward("UsuarioRead.mtw"));
         ac.addFilter(new AuthorizationFilter(new Permission("Usuario")));
         this.add(ac);
-        
+
         //Empresa
         ac = new ActionConfig("EmpresaRead", EmpresaReadAction.class);
         ac.addConsequence(SUCCESS, new Forward("jsp/empresa/list.page"));
@@ -172,8 +179,8 @@ public class AppManager extends ApplicationManager {
         ac.addConsequence(SUCCESS, new Redirect("EmpresaRead.mtw"));
         ac.addFilter(new AuthorizationFilter(new Permission("Empresa")));
         this.add(ac);
-        
-         //Parametro
+
+        //Parametro
         ac = new ActionConfig("ParametroRead", ParametroReadAction.class);
         ac.addConsequence(SUCCESS, new Forward("jsp/parametro/list.page"));
         ac.addConsequence(ERROR, new Redirect("Inicio.mtw"));
@@ -192,8 +199,8 @@ public class AppManager extends ApplicationManager {
         ac.addFilter(new AuthorizationFilter(new Permission("Parametro")));
         this.add(ac);
 
-        ac = new ActionConfig("ParametroUpdate", ParametroUpdateAction.class);        
-        ac.addConsequence(SUCCESS, new Redirect("ParametroRead.mtw"));     
+        ac = new ActionConfig("ParametroUpdate", ParametroUpdateAction.class);
+        ac.addConsequence(SUCCESS, new Redirect("ParametroRead.mtw"));
         ac.addConsequence(ERROR, new Forward("jsp/parametro/updateForm.page"));
         ac.addFilter(new AuthorizationFilter(new Permission("Parametro")));
         this.add(ac);
@@ -203,5 +210,39 @@ public class AppManager extends ApplicationManager {
         ac.addConsequence(ERROR, new Forward("ParametroRead.mtw"));
         ac.addFilter(new AuthorizationFilter(new Permission("Parametro")));
         this.add(ac);
+
+        //Viagem
+        ac = new ActionConfig("ViagemRead", ViagemReadAction.class);
+        ac.addConsequence("Financeiro", new Forward("jsp/viagem/readForm.page"));
+        ac.addConsequence("Solicitante", new Forward("jsp/viagem/list.page"));
+        ac.addConsequence(ERROR, new Forward("Inicio.mtw"));
+        ac.addFilter(new AuthorizationFilter(new Permission("Viagem")));
+        this.add(ac);
+
+        ac = new ActionConfig("ViagemShowForm", ViagemShowFormAction.class);
+        ac.addConsequence("CREATE", new Forward("jsp/viagem/createForm.page"));
+        ac.addConsequence("Financeiro", new Forward("jsp/viagem/manageForm.page"));
+        ac.addConsequence("Solicitante", new Forward("jsp/viagem/updateForm.page"));
+        ac.addConsequence(ERROR, new Forward("Inicio.mtw"));
+        ac.addFilter(new AuthorizationFilter(new Permission("Viagem")));
+        this.add(ac);
+
+        ac = new ActionConfig("ViagemCreate", ViagemCreateAction.class);
+        ac.addConsequence(SUCCESS, new Redirect("ViagemRead.mtw"));
+        ac.addConsequence(ERROR, new Forward("jsp/viagem/createForm.page"));
+        ac.addFilter(new AuthorizationFilter(new Permission("Viagem")));
+        this.add(ac);
+
+        ac = new ActionConfig("ViagemUpdate", ViagemUpdateAction.class);
+        ac.addConsequence(SUCCESS, new Redirect("ViagemRead.mtw"));
+        ac.addConsequence(ERROR, new Forward("jsp/viagem/updateForm.page"));
+        ac.addFilter(new AuthorizationFilter(new Permission("Viagem")));
+        this.add(ac);
+
+        ac = new ActionConfig("ViagemDelete", ViagemDeleteAction.class);
+        ac.addConsequence(SUCCESS, new Redirect("ViagemRead.mtw"));
+        ac.addFilter(new AuthorizationFilter(new Permission("Viagem")));
+        this.add(ac);
+
     }
 }
