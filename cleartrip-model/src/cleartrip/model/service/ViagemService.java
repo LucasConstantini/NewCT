@@ -5,10 +5,6 @@ import cleartrip.model.base.service.BaseViagemService;
 import cleartrip.model.dao.ViagemDAO;
 import cleartrip.model.pojo.Viagem;
 import java.sql.Connection;
-import java.sql.Date;
-import java.sql.Time;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,114 +30,92 @@ public class ViagemService implements BaseViagemService {
     @Override
     public Map<String, String> validateForCreate(Map<String, Object> properties) throws Exception {
         Map<String, String> errors = new HashMap<String, String>();
-        boolean ok = true;
-        SimpleDateFormat formatoHora = new SimpleDateFormat("H:mm");
-        if (properties != null) {
-            Long idTransporte = (Long) properties.get("transporte.id");
-            Long idUsuario = (Long) properties.get("usuario.id");
-            String status = (String) properties.get("status");
-            String destino = (String) properties.get("destino");
-            String enderecoDestivo = (String) properties.get("enderecoDestino");
-            String telefoneDestino = (String) properties.get("telefoneDestino");
-            String cidadePartida = (String) properties.get("cidadePartida");
-            String enderecoPartida = (String) properties.get("enderecoPartida");
-            String telefonePartida = (String) properties.get("telefonePartida");
-            Date dataPartida = (Date) properties.get("dataPartida");
-            Time horaPartida = (Time) properties.get("horaPartida");
-            Date dataVolta = (Date) properties.get("dataVolta");
-            Time horaVolta = (Time) properties.get("horaVolta");
-
-            if (idTransporte == null || idTransporte<0) {
-                errors.put("transporte", "Campo obrigatório!");
-                ok = false;
-            }
-            if (idUsuario == null || idUsuario<0) {
-                errors.put("usuario", "Campo obrigatório!");
-                ok = false;
-            }
-            if (status == null || status.isEmpty()) {
-                errors.put("status", "Campo obrigatório!");
-                ok = false;
-            }
-            if (destino == null || destino.isEmpty()) {
-                errors.put("destino", "Campo Obrigatório, digite o nome da empresa!");
-                ok = false;
-            }
-            if (enderecoDestivo == null || enderecoDestivo.isEmpty()) {
-                errors.put("enderecoDestino", "Campo obrigatório!");
-                ok = false;
-            }
-            if (telefoneDestino == null || telefoneDestino.isEmpty()) {
-                errors.put("telefoneDestino", "Campo obrigatório!");
-                ok = false;
-            }
-            if (cidadePartida == null || cidadePartida.isEmpty()) {
-                errors.put("cidadePartida", "Campo obrigatório!");
-                ok = false;
-            }
-            if (enderecoPartida == null || enderecoPartida.isEmpty()) {
-                errors.put("enderecoPartida", "Campo obrigatório!");
-                ok = false;
-            }
-            if (telefonePartida == null || telefonePartida.isEmpty()) {
-                errors.put("telefonePartida", "Campo obrigatório!");
-                ok = false;
-            }
-            
-            if (horaPartida == null) {
-                errors.put("horaPartida", "Entre com a hora da partida!");
-                ok = false;
-            } else {
-                java.util.Date horaMax = formatoHora.parse("24:00");
-                if (horaPartida.getTime() > horaMax.getTime()) {
-                    errors.put("horaPartida", "Insira uma hora válida!");
-                    ok = false;
-                }
-            }
-           if (horaVolta == null) {
-                errors.put("horaVolta", "Entre com a hora de volta!");
-                ok = false;
-            } else {
-                java.util.Date horaMax = formatoHora.parse("24:00");
-                if (horaPartida.getTime() > horaMax.getTime()) {
-                    errors.put("horaVolta", "Insira uma hora válida!");
-                    ok = false;
-                }
-            }
-           
-           if (dataPartida == null){
-               errors.put("dataPartida", "Digite a data da partida!");
-               ok = false;
-           } else{
-               if(dataPartida.after(Calendar.getInstance().getTime())){
-                   errors.put("dataPartida", "A data de partida não pode ser no passado!");
-               }
-           }
-            
-           if (dataVolta == null){
-               errors.put("dataVolta", "Digite a data da volta!");
-               ok = false;
-           } else{
-               if(dataVolta.before(dataPartida)){
-                   errors.put("dataVolta", "A volta não pode ser antes da ida!");
-                   ok = false;
-               }
-           }
-           
-            if (ok){
-                Map<String, Object> criteria = new HashMap<String, Object>();
-                criteria.put(ViagemDAO.CRITERION_DATA_PARTIDA_INICIO_EQ, dataPartida);
-                criteria.put(ViagemDAO.CRITERION_DATA_PARTIDA_FIM_EQ, dataVolta);
-                criteria.put(ViagemDAO.CRITERION_USUARIO_EQ, idUsuario);
-                criteria.put(ViagemDAO.CRITERION_STATUS_EQ, status);
-                List<Viagem> viagens = readByCriteria(criteria);
-                if (!viagens.isEmpty()){
-                    errors.put("invalido", "Esta viagem não pode ser marcada, pois já tem uma viagem marcada na mesma data para este usuário.");
-                }
-            }
-            
-            
-        }
+//        
+//        boolean ok = true;
+//        if (properties != null) {
+//            Long idTransporte = (Long) properties.get("meioTransporte.id");
+//            Long idUsuario = (Long) properties.get("usuario.id");
+//            String status = (String) properties.get("status");
+//            String destino = (String) properties.get("destino");
+//            String enderecoDestivo = (String) properties.get("enderecoDestino");
+//            String telefoneDestino = (String) properties.get("telefoneDestino");
+//            String cidadePartida = (String) properties.get("cidadePartida");
+//            String enderecoPartida = (String) properties.get("enderecoPartida");
+//            String telefonePartida = (String) properties.get("telefonePartida");
+//            String dataPartida = (String) properties.get("dataPartida");
+//            String horaPartida = (String) properties.get("horaPartida");
+//            String dataVolta = (String) properties.get("dataVolta");
+//            String horaVolta = (String) properties.get("horaVolta");
+//
+//            if (idTransporte == null || idTransporte < 0) {
+//                errors.put("transporte", "Campo obrigatório!");
+//                ok = false;
+//            }
+//            if (idUsuario == null || idUsuario < 0) {
+//                errors.put("usuario", "Campo obrigatório!");
+//                ok = false;
+//            }
+//            if (status == null || status.isEmpty()) {
+//                errors.put("status", "Campo obrigatório!");
+//                ok = false;
+//            }
+//            if (destino == null || destino.isEmpty()) {
+//                errors.put("destino", "Campo Obrigatório, digite o nome da empresa!");
+//                ok = false;
+//            }
+//            if (enderecoDestivo == null || enderecoDestivo.isEmpty()) {
+//                errors.put("enderecoDestino", "Campo obrigatório!");
+//                ok = false;
+//            }
+//            if (telefoneDestino == null || telefoneDestino.isEmpty()) {
+//                errors.put("telefoneDestino", "Campo obrigatório!");
+//                ok = false;
+//            }
+//            if (cidadePartida == null || cidadePartida.isEmpty()) {
+//                errors.put("cidadePartida", "Campo obrigatório!");
+//                ok = false;
+//            }
+//            if (enderecoPartida == null || enderecoPartida.isEmpty()) {
+//                errors.put("enderecoPartida", "Campo obrigatório!");
+//                ok = false;
+//            }
+//            if (telefonePartida == null || telefonePartida.isEmpty()) {
+//                errors.put("telefonePartida", "Campo obrigatório!");
+//                ok = false;
+//            }
+//
+//            if (horaPartida == null || horaPartida.isEmpty()) {
+//                errors.put("horaPartida", "Entre com a hora da partida!");
+//                ok = false;
+//            }
+//            if (horaVolta == null || horaVolta.isEmpty()) {
+//                errors.put("horaVolta", "Entre com a hora de volta!");
+//                ok = false;
+//            }
+//
+//            if (dataPartida == null || dataPartida.isEmpty()) {
+//                errors.put("dataPartida", "Digite a data da partida!");
+//                ok = false;
+//            }
+//
+//            if (dataVolta == null || dataVolta.isEmpty()) {
+//                errors.put("dataVolta", "Digite a data da volta!");
+//                ok = false;
+//            }
+//
+//            if (ok) {
+//                Map<String, Object> criteria = new HashMap<String, Object>();
+//                criteria.put(ViagemDAO.CRITERION_DATA_PARTIDA_INICIO_EQ, dataPartida);
+//                criteria.put(ViagemDAO.CRITERION_DATA_PARTIDA_FIM_EQ, dataVolta);
+//                criteria.put(ViagemDAO.CRITERION_USUARIO_EQ, idUsuario);
+//                criteria.put(ViagemDAO.CRITERION_STATUS_EQ, status);
+//                List<Viagem> viagens = readByCriteria(criteria);
+//                if (!viagens.isEmpty()) {
+//                    errors.put("invalido", "Esta viagem não pode ser marcada, pois já tem uma viagem marcada na mesma data para este usuário.");
+//                }
+//            }
+//
+//        }
         return errors;
     }
 
