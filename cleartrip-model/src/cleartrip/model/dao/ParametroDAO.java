@@ -4,7 +4,6 @@ import cleartrip.model.base.BaseDAO;
 import cleartrip.model.pojo.Empresa;
 import cleartrip.model.pojo.Parametro;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -22,15 +21,15 @@ public class ParametroDAO implements BaseDAO<Parametro> {
         PreparedStatement ps = conn.prepareStatement(sql);
         int i = 0;
        
-            ps.setTime(++i, e.getManha());
+            ps.setString(++i, e.getManha());
        
-            ps.setTime(++i, e.getTarde());
+            ps.setString(++i, e.getTarde());
        
-            ps.setTime(++i, e.getNoite());
+            ps.setString(++i, e.getNoite());
        
-            ps.setDate(++i, (Date) e.getDataTermino());
+            ps.setString(++i, (String) e.getDataTermino());
        
-            ps.setDate(++i, (Date) e.getDataInicio());
+            ps.setString(++i, (String) e.getDataInicio());
         
             ps.setInt(++i, e.getMargemDeslocamento());
         
@@ -53,11 +52,11 @@ public class ParametroDAO implements BaseDAO<Parametro> {
         if (rs.next()) {
             e = new Parametro();
             e.setId(rs.getLong("id"));
-            e.setManha(rs.getTime("manha"));
-            e.setTarde(rs.getTime("tarde"));
-            e.setNoite(rs.getTime("noite"));
-            e.setDataInicio(rs.getDate("dataInicio"));
-            e.setDataTermino(rs.getDate("dataTermino"));
+            e.setManha(rs.getString("manha"));
+            e.setTarde(rs.getString("tarde"));
+            e.setNoite(rs.getString("noite"));
+            e.setDataInicio(rs.getString("dataInicio"));
+            e.setDataTermino(rs.getString("dataTermino"));
             e.setMargemDeslocamento(rs.getInt("margemDeslocamento"));
             e.setCustoKm(rs.getDouble("custoKm"));
             
@@ -88,11 +87,11 @@ public class ParametroDAO implements BaseDAO<Parametro> {
             Parametro e = new Parametro();
             
             e.setId(rs.getLong("id"));
-            e.setManha(rs.getTime("manha"));
-            e.setTarde(rs.getTime("tarde"));
-            e.setNoite(rs.getTime("noite"));
-            e.setDataInicio(rs.getDate("dataInicio"));
-            e.setDataTermino(rs.getDate("dataTermino"));
+            e.setManha(rs.getString("manha"));
+            e.setTarde(rs.getString("tarde"));
+            e.setNoite(rs.getString("noite"));
+            e.setDataInicio(rs.getString("dataInicio"));
+            e.setDataTermino(rs.getString("dataTermino"));
             e.setMargemDeslocamento(rs.getInt("margemDeslocamento"));
             e.setCustoKm(rs.getDouble("custoKm"));
             
@@ -117,15 +116,15 @@ public class ParametroDAO implements BaseDAO<Parametro> {
         PreparedStatement ps = conn.prepareStatement(sql);
         int i = 0;
        
-            ps.setTime(++i, e.getManha());
+            ps.setString(++i, e.getManha());
         
-            ps.setTime(++i, e.getTarde());
+            ps.setString(++i, e.getTarde());
         
-            ps.setTime(++i, e.getNoite());
+            ps.setString(++i, e.getNoite());
         
-            ps.setDate(++i, (Date) e.getDataTermino());
+            ps.setString(++i, (String) e.getDataTermino());
         
-            ps.setDate(++i, (Date) e.getDataInicio());
+            ps.setString(++i, (String) e.getDataInicio());
        
             ps.setInt(++i, e.getMargemDeslocamento());
         

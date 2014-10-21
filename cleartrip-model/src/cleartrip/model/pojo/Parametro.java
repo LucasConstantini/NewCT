@@ -1,20 +1,17 @@
 package cleartrip.model.pojo;
 
 import cleartrip.model.base.BasePOJO;
-import java.util.Date;
-import java.sql.Time;
 
 public class Parametro extends BasePOJO {
 
-   
     private Empresa empresa;
-    private Time manha;
-    private Time tarde;
-    private Time noite;
+    private String manha;
+    private String tarde;
+    private String noite;
     private Double custoKm;
     private Integer margemDeslocamento;
-    private Date dataInicio;
-    private Date dataTermino;
+    private String dataInicio;
+    private String dataTermino;
 
     public Empresa getEmpresa() {
         return empresa;
@@ -24,27 +21,27 @@ public class Parametro extends BasePOJO {
         this.empresa = empresa;
     }
 
-    public Time getManha() {
+    public String getManha() {
         return manha;
     }
 
-    public void setManha(Time manha) {
+    public void setManha(String manha) {
         this.manha = manha;
     }
 
-    public Time getTarde() {
+    public String getTarde() {
         return tarde;
     }
 
-    public void setTarde(Time tarde) {
+    public void setTarde(String tarde) {
         this.tarde = tarde;
     }
 
-    public Time getNoite() {
+    public String getNoite() {
         return noite;
     }
 
-    public void setNoite(Time noite) {
+    public void setNoite(String noite) {
         this.noite = noite;
     }
 
@@ -64,19 +61,19 @@ public class Parametro extends BasePOJO {
         this.margemDeslocamento = margemDeslocamento;
     }
 
-    public Date getDataInicio() {
+    public String getDataInicio() {
         return dataInicio;
     }
 
-    public void setDataInicio(Date dataInicio) {
+    public void setDataInicio(String dataInicio) {
         this.dataInicio = dataInicio;
     }
 
-    public Date getDataTermino() {
+    public String getDataTermino() {
         return dataTermino;
     }
 
-    public void setDataTermino(Date dataTermino) {
+    public void setDataTermino(String dataTermino) {
         this.dataTermino = dataTermino;
     }
 }
