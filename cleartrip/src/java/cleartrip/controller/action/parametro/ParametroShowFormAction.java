@@ -20,17 +20,17 @@ public class ParametroShowFormAction extends BaseAction {
             output.setValue("parametro", parametro);
             consequence = "UPDATE";
         }
-        //this.preload();
+        this.preload();
         return consequence;
     }
 
-//    private void preload() throws Exception {
-//        Map<String, Object> criteria = new HashMap<String, Object>();
-//        List<Empresa> empresas = ServiceLocator.getEmpresaService().readByCriteria(criteria);
-//        Map<Long, String> empresasOptions = new LinkedHashMap<Long, String>();
-//        for (Empresa empresa : empresas) {
-//            empresasOptions.put(empresa.getId(), empresa.getNomeFantasia());
-//        }
-//        output.setValue("empresas", empresasOptions);
-//    }
+    private void preload() throws Exception {
+        Map<String, Object> criteria = new HashMap<String, Object>();
+        List<Empresa> empresas = ServiceLocator.getEmpresaService().readByCriteria(criteria);
+        Map<Long, String> empresasOptions = new LinkedHashMap<Long, String>();
+        for (Empresa empresa : empresas) {
+            empresasOptions.put(empresa.getId(), empresa.getNomeFantasia());
+        }
+        output.setValue("empresas", empresasOptions);
+    }
 }

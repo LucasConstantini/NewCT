@@ -30,13 +30,19 @@ public class ParametroCreateAction extends BaseAction {
             form.put("tarde", Time.valueOf(aux));
             aux = input.getString("noite") + ":00";
             form.put("noite", Time.valueOf(aux));
-            form.put("custoKm", input.getLong("custoKm"));
+            form.put("custoKm", input.getDouble("custoKm"));
             form.put("margemDeslocamento", input.getInt("margemDeslocamento"));
-            form.put("dataTermino", input.getDate("dataTermino"));
+
+            Date dateFim = input.getDate("dataTermino");
+            java.sql.Date sqlDateFim = new java.sql.Date(dateFim.getTime());
+            form.put("dataTermino", sqlDateFim);
             
             DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             Date date = new Date();
-            form.put("dataInicio",dateFormat.format(date));            
+            String r = dateFormat.format(date);
+            date = dateFormat.parse(r);
+            java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+            form.put("dataInicio", sqlDate);            
             
             Usuario usuario = new Usuario();
             usuario = (Usuario) session.getAttribute("usuarioLogado");
@@ -46,7 +52,7 @@ public class ParametroCreateAction extends BaseAction {
             error = ServiceLocator.getParametroService().validateForCreate(form);
 
         } catch (Exception e) {
-
+            System.out.println("---------------------------->"+e);
         }
 
         if (error == null || error.isEmpty()) {
@@ -57,7 +63,7 @@ public class ParametroCreateAction extends BaseAction {
             parametro.setNoite((Time) form.get("noite"));
             parametro.setDataInicio((Date) form.get("dataInicio"));
             parametro.setDataTermino((Date) form.get("dataTermino"));
-            parametro.setCustoKm((Long) form.get("custoKm"));
+            parametro.setCustoKm((Double) form.get("custoKm"));
             parametro.setMargemDeslocamento((Integer) form.get("margemDeslocamento"));
             //Set empresa
             Long idEmpresa = (Long) form.get("empresa.id");

@@ -5,6 +5,8 @@ import cleartrip.model.pojo.Empresa;
 import cleartrip.model.pojo.Parametro;
 import java.sql.Date;
 import java.sql.Time;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 import org.mentawai.core.BaseAction;
@@ -22,7 +24,14 @@ public class ParametroUpdateAction extends BaseAction {
         form.put("tarde", Time.valueOf(input.getString("parametro.tarde")));
         form.put("noite", Time.valueOf(input.getString("parametro.noite")));
         form.put("dataInicio", input.getDate("parametro.dataInicio"));
-        form.put("dataTermino", input.getDate("parametro.dataTermino"));
+
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        java.util.Date date = input.getDate("parametro.dataTermino");
+        String r = dateFormat.format(date);
+        date = dateFormat.parse(r);
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+        form.put("dataInicio", sqlDate);
+
         form.put("custoKm", input.getLong("parametro.custoKm"));
         form.put("margemDeslocamento", input.getInt("parametro.margemDeslocamento"));
         form.put("empresa.id", input.getLong("parametro.empresa.id"));
@@ -38,7 +47,7 @@ public class ParametroUpdateAction extends BaseAction {
             parametro.setNoite((Time) form.get("noite"));
             parametro.setDataInicio((Date) form.get("dataInicio"));
             parametro.setDataTermino((Date) form.get("dataTermino"));
-            parametro.setCustoKm((Long) form.get("custoKm"));
+            parametro.setCustoKm((Double) form.get("custoKm"));
             parametro.setMargemDeslocamento((Integer) form.get("margemDeslocamento"));
             //Set empresa
             Long idEmpresa = (Long) form.get("empresa.id");

@@ -1,14 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="../../WEB-INF/imports.jspf"%>
 
-<mtw:form action="UsuarioUpdate.mtw" method="post">
-    <mtw:input type="hidden" name="usuario.empresa.id"/>
-    <mtw:input type="hidden" name="usuario.id"/>
-    <mtw:input type="hidden" name="usuario.login"/>
-    <mtw:input type="hidden" name="usuario.cpf"/>
-    <mtw:input type="hidden" name="usuario.rg"/>
-    <mtw:input type="hidden" name="usuario.senha"/>
-    <mtw:input type="hidden" name="usuario.tipo"/>
+<mtw:form action="ParametroUpdate.mtw" method="post">
+    <mtw:input type="hidden" name="parametro.id"/>
 
     <div>
         <legend>
