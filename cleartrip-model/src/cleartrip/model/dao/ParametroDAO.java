@@ -34,7 +34,7 @@ public class ParametroDAO implements BaseDAO<Parametro> {
         
             ps.setInt(++i, e.getMargemDeslocamento());
         
-            ps.setLong(++i, e.getCustoKm());
+            ps.setDouble(++i, e.getCustoKm());
        
         ps.setLong(++i, e.getEmpresa().getId());
 
@@ -51,6 +51,7 @@ public class ParametroDAO implements BaseDAO<Parametro> {
         ps.setLong(1, id);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
+            e = new Parametro();
             e.setId(rs.getLong("id"));
             e.setManha(rs.getTime("manha"));
             e.setTarde(rs.getTime("tarde"));
@@ -58,7 +59,7 @@ public class ParametroDAO implements BaseDAO<Parametro> {
             e.setDataInicio(rs.getDate("dataInicio"));
             e.setDataTermino(rs.getDate("dataTermino"));
             e.setMargemDeslocamento(rs.getInt("margemDeslocamento"));
-            e.setCustoKm(rs.getLong("custoKm"));
+            e.setCustoKm(rs.getDouble("custoKm"));
             
             //empresa
             Empresa empresa = new Empresa();
@@ -93,7 +94,7 @@ public class ParametroDAO implements BaseDAO<Parametro> {
             e.setDataInicio(rs.getDate("dataInicio"));
             e.setDataTermino(rs.getDate("dataTermino"));
             e.setMargemDeslocamento(rs.getInt("margemDeslocamento"));
-            e.setCustoKm(rs.getLong("custoKm"));
+            e.setCustoKm(rs.getDouble("custoKm"));
             
             //empresa
             Empresa empresa = new Empresa();
@@ -128,7 +129,7 @@ public class ParametroDAO implements BaseDAO<Parametro> {
        
             ps.setInt(++i, e.getMargemDeslocamento());
         
-            ps.setLong(++i, e.getCustoKm());
+            ps.setDouble(++i, e.getCustoKm());
         
         ps.setLong(++i, e.getEmpresa().getId());
         ps.setLong(++i, e.getId());
