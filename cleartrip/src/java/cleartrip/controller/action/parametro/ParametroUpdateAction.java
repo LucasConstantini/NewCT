@@ -20,33 +20,26 @@ public class ParametroUpdateAction extends BaseAction {
         //Montando o mapa
         Map<String, Object> form = new HashMap<String, Object>();
         form.put("id", input.getLong("parametro.id"));
-        form.put("manha", Time.valueOf(input.getString("parametro.manha")));
-        form.put("tarde", Time.valueOf(input.getString("parametro.tarde")));
-        form.put("noite", Time.valueOf(input.getString("parametro.noite")));
-        form.put("dataInicio", input.getDate("parametro.dataInicio"));
-
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        java.util.Date date = input.getDate("parametro.dataTermino");
-        String r = dateFormat.format(date);
-        date = dateFormat.parse(r);
-        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-        form.put("dataInicio", sqlDate);
-
-        form.put("custoKm", input.getLong("parametro.custoKm"));
+        form.put("manha", input.getString("parametro.manha"));
+        form.put("tarde", input.getString("parametro.tarde"));
+        form.put("noite", input.getString("parametro.noite"));
+        form.put("custoKm", input.getDouble("parametro.custoKm"));
         form.put("margemDeslocamento", input.getInt("parametro.margemDeslocamento"));
+        form.put("dataTermino", input.getString("parametro.dataTermino"));
+        form.put("dataInicio", input.getString("parametro.dataInicio"));
         form.put("empresa.id", input.getLong("parametro.empresa.id"));
 
         //Validando
-        Map<String, String> error = ServiceLocator.getUsuarioService().validateForUpdate(form);
+        Map<String, String> error = ServiceLocator.getParametroService().validateForUpdate(form);
         if (error == null || error.isEmpty()) {
             //Monto o pojo
             parametro = new Parametro();
             parametro.setId((Long) form.get("id"));
-            parametro.setManha((Time) form.get("manha"));
-            parametro.setTarde((Time) form.get("tarde"));
-            parametro.setNoite((Time) form.get("noite"));
-            parametro.setDataInicio((Date) form.get("dataInicio"));
-            parametro.setDataTermino((Date) form.get("dataTermino"));
+            parametro.setManha((String) form.get("manha"));
+            parametro.setTarde((String) form.get("tarde"));
+            parametro.setNoite((String) form.get("noite"));
+            parametro.setDataInicio((String) form.get("dataInicio"));
+            parametro.setDataTermino((String) form.get("dataTermino"));
             parametro.setCustoKm((Double) form.get("custoKm"));
             parametro.setMargemDeslocamento((Integer) form.get("margemDeslocamento"));
             //Set empresa

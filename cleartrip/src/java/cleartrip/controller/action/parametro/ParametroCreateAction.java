@@ -24,25 +24,17 @@ public class ParametroCreateAction extends BaseAction {
 
         try {
 
-            String aux = input.getString("manha") + ":00";
-            form.put("manha", Time.valueOf(aux));
-            aux = input.getString("tarde") + ":00";
-            form.put("tarde", Time.valueOf(aux));
-            aux = input.getString("noite") + ":00";
-            form.put("noite", Time.valueOf(aux));
+            form.put("manha", input.getString("manha"));
+            form.put("tarde", input.getString("tarde"));
+            form.put("noite", input.getString("noite"));
             form.put("custoKm", input.getDouble("custoKm"));
             form.put("margemDeslocamento", input.getInt("margemDeslocamento"));
+            form.put("dataTermino", input.getString("dataTermino"));
 
-            Date dateFim = input.getDate("dataTermino");
-            java.sql.Date sqlDateFim = new java.sql.Date(dateFim.getTime());
-            form.put("dataTermino", sqlDateFim);
-            
             DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             Date date = new Date();
-            String r = dateFormat.format(date);
-            date = dateFormat.parse(r);
-            java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-            form.put("dataInicio", sqlDate);            
+            String dataInicio = dateFormat.format(date);
+            form.put("dataInicio", dataInicio);            
             
             Usuario usuario = new Usuario();
             usuario = (Usuario) session.getAttribute("usuarioLogado");
@@ -58,11 +50,11 @@ public class ParametroCreateAction extends BaseAction {
         if (error == null || error.isEmpty()) {
             //Monto o pojo
             Parametro parametro = new Parametro();
-            parametro.setManha((Time) form.get("manha"));
-            parametro.setTarde((Time) form.get("tarde"));
-            parametro.setNoite((Time) form.get("noite"));
-            parametro.setDataInicio((Date) form.get("dataInicio"));
-            parametro.setDataTermino((Date) form.get("dataTermino"));
+            parametro.setManha((String)form.get("manha"));
+            parametro.setTarde((String) form.get("tarde"));
+            parametro.setNoite((String) form.get("noite"));
+            parametro.setDataInicio((String) form.get("dataInicio"));
+            parametro.setDataTermino((String) form.get("dataTermino"));
             parametro.setCustoKm((Double) form.get("custoKm"));
             parametro.setMargemDeslocamento((Integer) form.get("margemDeslocamento"));
             //Set empresa

@@ -3,6 +3,7 @@
 
 <mtw:form action="ParametroUpdate.mtw" method="post">
     <mtw:input type="hidden" name="parametro.id"/>
+    <mtw:input type="hidden" name="parametro.dataInicio"/>
 
     <div>
         <legend>

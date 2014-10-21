@@ -10,7 +10,8 @@
         <div>
             <label for="inputManha">Manha</label>
             <div>
-                <mtw:input type="text" klass="campoHora" id="inputNome" name="manha"/>
+                <mtw:input type="text" id="inputManha" name="manha"/>
+                <span class="label label-important">${error.manha}</span>
             </div>
         </div>
         <br/>
@@ -48,7 +49,7 @@
         <div>
             <label for="inputDataTermino">Data de Termino</label>
             <div>
-                <mtw:input type="text" klass="calendario" id="inputDataTermino" name="dataTermino"/>
+                <mtw:input type="text" id="inputDataTermino" name="dataTermino"/>
             </div>
         </div>
 
