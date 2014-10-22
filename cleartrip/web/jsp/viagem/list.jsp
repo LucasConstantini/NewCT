@@ -10,29 +10,28 @@
 
 <div class="input-append">
     <mtw:form action="ViagemRead.mtw" method="post">
-       
-        <div class="control-group">
-            <label class="control-label" for="inputTipo">Status</label>
-            <div class="controls">
-                <select name="status">
-                    <option value="">Selecione...</option>
-                    <option value="A">Aprovado</option>
-                    <option value="R">Recusado</option>
-                    <option value="E">Em Espera</option>
-                </select>
-            </div>
+
+        <div>
+            <select name="status">
+                <option value="">Status...</option>
+                <option value="A">Aprovado</option>
+                <option value="R">Recusado</option>
+                <option value="E">Em Espera</option>
+            </select>
+
+
+
         </div>
         <button class="btn" type="submit"><img src='img/pesquisar.png'></button>
         <a href="ViagemShowForm.mtw" class="btn"><img src='img/novo.png'>Novo</a>
         </mtw:form>    
+
 </div>
 
 
-<div>
+<div class="tabela">
     <display:table name="lista" pagesize="20" requestURI="" defaultsort="1">
-        <display:column property="status" sortName="status" sortable="true" title="Status" style="width:4%;"/>
-        <display:column property="destino" sortName="destino" sortable="true" title="Destino" style="width:4%;"/>
-        <display:column property="dataPartida" sortable="true" title="Partida" format="{0, date, dd/MM/yyyy}" style="width:10%;"/>
+        <display:column property="destino" sortName="destino" sortable="true" title="Destino" style="width:50%;"/>
         <display:column title="Editar" value="<img src='img/editar.png'alt='Editar'>" href="ViagemShowForm.mtw"  paramId="id" paramProperty="id" style="width:5%;"/>
         <display:column title="Excluir" value="<img src='img/lixeira.png'alt='Excluir'>" href="ViagemDelete.mtw" class="deleteLink" paramId="id" paramProperty="id" style="width:5%;"/>
     </display:table>

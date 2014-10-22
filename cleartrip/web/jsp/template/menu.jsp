@@ -11,15 +11,16 @@
                 <i class="fa fa-bars fa-lg"></i>
             </button>
             <ul class="dropdown-menu pull-right" role="menu">
-                <li><mtw:hasAuthorization permission="Usuario"><a href="UsuarioRead.mtw">Usuários</a></mtw:hasAuthorization></li>
-                <li><mtw:hasAuthorization permission="Transporte"><a href="TransporteRead.mtw">Meios de Transporte</a></mtw:hasAuthorization></li>
-                <li><mtw:hasAuthorization permission="Viagem"><a href="ViagemRead.mtw">Viagens</a></mtw:hasAuthorization></li>
-                <li><mtw:hasAuthorization permission="Empresa"><a href="EmpresaRead.mtw">Empresas</a></mtw:hasAuthorization></li>
-                <li><mtw:hasAuthorization permission="Parametro"><a href="ParametroRead.mtw">Parametros</a></mtw:hasAuthorization></li>
+                <li><mtw:hasAuthorization permission="Usuario"><a href="UsuarioRead.mtw"><i class="fa fa-users"></i> Usuários</a></mtw:hasAuthorization></li>
+                <li><mtw:hasAuthorization permission="Transporte"><a href="TransporteRead.mtw"><i class="fa fa-car"></i> Meios de Transporte</a></mtw:hasAuthorization></li>
+                <li><mtw:hasAuthorization permission="Viagem"><a href="ViagemRead.mtw"><i class="fa fa-globe"></i> Viagens</a></mtw:hasAuthorization></li>
+                <li><mtw:hasAuthorization permission="Empresa"><a href="EmpresaRead.mtw"><i class="fa fa-institution"></i> Empresas</a></mtw:hasAuthorization></li>
+                <li><mtw:hasAuthorization permission="Parametro"><a href="ParametroRead.mtw"><i class="fa fa-sliders"></i> Parametros</a></mtw:hasAuthorization></li>
+                <li><mtw:hasAuthorization permission="CategoriaDespesa"><a href="CategoriaDespesaRead.mtw"><i class="fa fa-money"></i> Categoria Despesa</a></mtw:hasAuthorization></li>
                 <li class="divider"></li>
-                <li><a href="UsuarioShowForm.mtw" paramId="login" paramProperty="login">Configurações</a></li>
+                <li><a href="UsuarioShowForm.mtw" paramId="login" paramProperty="login"><i class="fa fa-gears"></i> Configurações</a></li>
                 <li class="divider"></li>
-                <li><a href="Logout.mtw">Sair</a></li>
+                <li><a href="Logout.mtw"><i class="fa fa-power-off"></i> Sair</a></li>
             </ul>
         </div>
     </div>

@@ -1,6 +1,12 @@
 package cleartrip.controller;
 
 import cleartrip.controller.action.InicioAction;
+import cleartrip.controller.action.categoriadespesa.CategoriaDespesaCreateAction;
+import cleartrip.controller.action.categoriadespesa.CategoriaDespesaDeleteAction;
+import cleartrip.controller.action.categoriadespesa.CategoriaDespesaReadAction;
+import cleartrip.controller.action.categoriadespesa.CategoriaDespesaShowFormAction;
+import cleartrip.controller.action.categoriadespesa.CategoriaDespesaUpdateAction;
+import cleartrip.controller.action.despesa.NewDespesaAction;
 import cleartrip.controller.action.empresa.EmpresaCreateAction;
 import cleartrip.controller.action.empresa.EmpresaDeleteAction;
 import cleartrip.controller.action.empresa.EmpresaReadAction;
@@ -33,11 +39,13 @@ import org.mentawai.authorization.Group;
 import org.mentawai.authorization.Permission;
 import org.mentawai.core.ActionConfig;
 import org.mentawai.core.ApplicationManager;
+import static org.mentawai.core.ApplicationManager.SUCCESS;
 import org.mentawai.core.Context;
 import org.mentawai.core.Forward;
 import org.mentawai.core.Redirect;
 import org.mentawai.filter.AuthenticationFilter;
 import org.mentawai.filter.AuthorizationFilter;
+import org.mentawai.filter.FileUploadFilter;
 
 public class AppManager extends ApplicationManager {
 
@@ -57,6 +65,7 @@ public class AppManager extends ApplicationManager {
         financeiro.addPermission("Parametro");
         financeiro.addPermission("Inicio");
         financeiro.addPermission("Viagem");
+        financeiro.addPermission("CategoriaDespesa");
         AuthorizationManager.addGroup(financeiro);
         //
         Group solicitante = new Group("Solicitante");
@@ -75,17 +84,12 @@ public class AppManager extends ApplicationManager {
         //Configurar App.
         ActionConfig ac = null;
 
-        //Action de Teste
-        ac = new ActionConfig("Inicio", InicioAction.class);
-        ac.addConsequence(SUCCESS, new Forward("jsp/teste.page"));
-        this.add(ac);
-
         //Autenticação
         ac = new ActionConfig("Login", LoginAction.class);
         ac.addConsequence(ERROR, new Redirect("/"));
-        ac.addConsequence("Financeiro", new Redirect("Inicio.mtw"));
-        ac.addConsequence("Solicitante", new Redirect("Inicio.mtw"));
-        ac.addConsequence("Administrador", new Redirect("Inicio.mtw"));
+        ac.addConsequence("Financeiro", new Redirect("ViagemRead.mtw"));
+        ac.addConsequence("Solicitante", new Redirect("ViagemRead.mtw"));
+        ac.addConsequence("Administrador", new Redirect("UsuarioRead.mtw"));
         this.add(ac);
 
         ac = new ActionConfig("Logout", LogoutAction.class);
@@ -243,6 +247,40 @@ public class AppManager extends ApplicationManager {
         ac.addConsequence(SUCCESS, new Redirect("ViagemRead.mtw"));
         ac.addFilter(new AuthorizationFilter(new Permission("Viagem")));
         this.add(ac);
+        
+        //Categoria Despesa
+        ac = new ActionConfig("CategoriaDespesaRead", CategoriaDespesaReadAction.class);
+        ac.addConsequence(SUCCESS, new Forward("jsp/categoriadespesa/list.page"));
+        ac.addFilter(new AuthorizationFilter(new Permission("CategoriaDespesa")));
+        this.add(ac);
 
+        ac = new ActionConfig("CategoriaDespesaShowForm", CategoriaDespesaShowFormAction.class);
+        ac.addConsequence("CREATE", new Forward("jsp/categoriadespesa/createForm.page"));
+        ac.addConsequence("UPDATE", new Forward("jsp/categoriadespesa/updateForm.page"));
+        ac.addFilter(new AuthorizationFilter(new Permission("CategoriaDespesa")));
+        this.add(ac);
+
+        ac = new ActionConfig("CategoriaDespesaCreate", CategoriaDespesaCreateAction.class);
+        ac.addConsequence(SUCCESS, new Redirect("CategoriaDespesaRead.mtw"));
+        ac.addConsequence(ERROR, new Forward("jsp/categoriadespesa/createForm.page"));
+        ac.addFilter(new AuthorizationFilter(new Permission("CategoriaDespesa")));
+        this.add(ac);
+
+        ac = new ActionConfig("CategoriaDespesaUpdate", CategoriaDespesaUpdateAction.class);
+        ac.addConsequence(SUCCESS, new Redirect("CategoriaDespesaRead.mtw"));
+        ac.addConsequence(ERROR, new Forward("jsp/categoriadespesa/updateForm.page"));
+        ac.addFilter(new AuthorizationFilter(new Permission("CategoriaDespesa")));
+        this.add(ac);
+
+        ac = new ActionConfig("CategoriaDespesaDelete", CategoriaDespesaDeleteAction.class);
+        ac.addConsequence(SUCCESS, new Redirect("CategoriaDespesaRead.mtw"));
+        ac.addFilter(new AuthorizationFilter(new Permission("CategoriaDespesa")));
+        this.add(ac);
+
+        //Imagem
+        ac = new ActionConfig("ImgSet", NewDespesaAction.class);
+        ac.addConsequence(SUCCESS, new Redirect("/"));
+        addActionConfig(ac);
+        ac.addFilter(new FileUploadFilter());
     }
 }

@@ -31,6 +31,7 @@ public class ViagemReadAction extends BaseAction {
             output.setValue("lista", viagens);
             consequence = "Financeiro";
         } else {
+            criteria.put(ViagemDAO.CRITERION_USUARIO_ID, user.getId());
             List<Viagem> viagens = ServiceLocator.getViagemService().readByCriteria(criteria);
             output.setValue("lista", viagens);
             consequence = "Solicitante";

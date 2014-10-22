@@ -28,7 +28,7 @@
                     <!-- Text input-->
                     <div class="control-group">
                         <div class="controls">
-                            <label for="mail">LOGIN</label>
+                            <label for="mail">Login</label>
                             <mtw:input id="mail" name="login" type="text" klass="input-xlarge" />
                         </div>
                     </div>
@@ -36,7 +36,7 @@
                     <!-- Password input-->
                     <div class="control-group">
                         <div class="controls">
-                            <label for="pwd">SENHA</label>
+                            <label for="pwd">Senha</label>
                             <mtw:input id="pwd" name="senha" type="password" klass="input-xlarge" />
                         </div>
                     </div>

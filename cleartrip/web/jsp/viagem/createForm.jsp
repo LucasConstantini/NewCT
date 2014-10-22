@@ -2,7 +2,7 @@
 <%@include file="../../WEB-INF/imports.jspf"%>
 
 <mtw:form klass="form-horizontal" action="ViagemCreate.mtw" method="post">
-    <legend>Soliciatar Viagem</legend>
+    <legend>Solicitar Viagem</legend>
 
     <div>
         <!-- Inicio da JSP -->
@@ -14,9 +14,9 @@
             </div>
         </div>
         <br />
-        <div class="control-group">
-            <label class="control-label" for="inputTransporte">Transporte</label>
-            <div class="controls">
+        <div>
+            <label for="inputTransporte">Transporte</label>
+            <div>
                 <mtw:select id="inputTransporte" name="transporte.id" list="transportes" emptyField="true" emptyFieldValue="Selecione..."/>
                 <span class="label label-important">${error.transporte}</span>
             </div>

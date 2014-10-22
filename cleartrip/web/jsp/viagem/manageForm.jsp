@@ -3,6 +3,7 @@
 
 <mtw:form klass="form-horizontal" action="UsuarioCreate.mtw" method="post">
     <mtw:input type="hidden" name="viagem.id"/>
+    <mtw:input type="hidden" name="viagem.transporte.id"/>
 
     <legend>Soliciatar Viagem</legend>
 

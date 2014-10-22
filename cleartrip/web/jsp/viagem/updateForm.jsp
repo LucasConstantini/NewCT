@@ -4,7 +4,7 @@
 <mtw:form klass="form-horizontal" action="ViagemUpdate.mtw" method="post">
     <mtw:input type="hidden" name="viagem.id"/>
     
-    <legend>Soliciatar Viagem</legend>
+    <legend>Alterar Viagem Solicitada</legend>
 
     <div>
         <!-- Inicio da JSP -->
@@ -16,9 +16,9 @@
             </div>
         </div>
         <br />
-        <div class="control-group">
-            <label class="control-label" for="inputTransporte">Transporte</label>
-            <div class="controls">
+        <div>
+            <label for="inputTransporte">Transporte</label>
+            <div>
                 <mtw:select id="inputTransporte" name="viagem.transporte.id" list="transportes" emptyField="true" emptyFieldValue="Selecione..."/>
                 <span class="label label-important">${error.transporte}</span>
             </div>

@@ -34,7 +34,7 @@
             <span class="label label-important">${error.emailCorporativo}</span>
         </div>
     </div>
-
+    <br />
     <div>
         <label for="inputTelefonePessoal">Telefone Pessoal</label>
         <div>
@@ -42,6 +42,7 @@
             <span class="label label-important">${error.telefonePessoal}</span>
         </div>
     </div>
+    <br />
     <div>
         <label for="inputTelefoneCorporativo">Telefone Corporativo</label>
         <div>
@@ -49,7 +50,7 @@
             <span class="label label-important">${error.telefoneCorporativo}</span>
         </div>
     </div>
-    <br/>  
+    <br />  
     <!-- Button -->
     <div class="control-group">
         <label class="control-label" for="entrar"></label>
