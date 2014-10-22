@@ -15,4 +15,5 @@ public interface BaseDAO<E extends BasePOJO> {
     public void update(E e, Connection conn) throws Exception;
 
     public void delete(Long id, Connection conn) throws Exception;
+
 }

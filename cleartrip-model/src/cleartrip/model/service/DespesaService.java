@@ -39,7 +39,7 @@ public class DespesaService implements BaseDespesaService {
             Date dataCompra = (Date) properties.get("dataCompra");
             Time horaCompra = (Time) properties.get("horaCompra");
             Double valorRealAutorizado = (Double) properties.get("valorRealAutorizado");
-            
+
             if (idViagem == null) {
                 errors.put("viagem", "Campo obrigatório!");
             }
@@ -127,6 +127,34 @@ public class DespesaService implements BaseDespesaService {
             throw e;
         }
 
+    }
+
+    @Override
+    public void setImagem(byte[] imagem) throws Exception {
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        try {
+            DespesaDAO dao = new DespesaDAO();
+            dao.setImagem(conn, imagem);
+            conn.commit();
+            conn.close();
+        } catch (Exception e) {
+            conn.rollback();
+        }
+    }
+
+    @Override
+    public byte[] getImagem(Long id) throws Exception {
+        byte[] imagem = null;
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        try {
+            DespesaDAO dao = new DespesaDAO();
+            imagem = dao.getImagem(conn, id);
+            conn.commit();
+            conn.close();
+        } catch (Exception e) {
+            conn.rollback();
+        }
+        return imagem;
     }
 
 }

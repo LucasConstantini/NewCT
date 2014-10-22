@@ -16,6 +16,7 @@ import java.util.Map;
 public class ViagemDAO implements BaseDAO<Viagem> {
 
     public static final String CRITERION_STATUS_EQ = "1";
+    public static final String CRITERION_USUARIO_ID = "2";
     public static final String CRITERION_USUARIO_EQ = "3";
     public static final String CRITERION_DATA_PARTIDA_INICIO_EQ = "4";
     public static final String CRITERION_DATA_PARTIDA_FIM_EQ = "5";
@@ -185,6 +186,11 @@ public class ViagemDAO implements BaseDAO<Viagem> {
         String criterionUsuarioEq = (String) criteria.get(CRITERION_USUARIO_EQ);
         if (criterionUsuarioEq != null && !criterionUsuarioEq.trim().isEmpty()) {
             sql += " AND lower(usuario.nome) ilike '%" + criterionUsuarioEq + "%'";
+        }
+        
+        Long criterionUsuarioId = (Long) criteria.get(CRITERION_USUARIO_ID);
+        if (criterionUsuarioId != null) {
+            sql += " AND viagem.usuario_fk = " + criterionUsuarioId;
         }
 
         String criterionStatusEq = (String) criteria.get(CRITERION_STATUS_EQ);
