@@ -5,7 +5,7 @@
     <mtw:input type="hidden" name="viagem.id"/>
     <mtw:input type="hidden" name="viagem.transporte.id"/>
 
-    <legend>Soliciatar Viagem</legend>
+    <legend>Gerenciar Viagem</legend>
 
     <div>
         <!-- Inicio da JSP -->

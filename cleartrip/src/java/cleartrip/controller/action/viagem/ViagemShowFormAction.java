@@ -16,7 +16,7 @@ public class ViagemShowFormAction extends BaseAction {
     public String execute() throws Exception {
         String consequence = ERROR;
         Long id = input.getLong("id");
-        if (id != null && id > 0) {
+        if (id > 0) {
             Usuario user = new Usuario();
             user = (Usuario) session.getAttribute("usuarioLogado");
             if (user.getTipo().equals("Financeiro")) {

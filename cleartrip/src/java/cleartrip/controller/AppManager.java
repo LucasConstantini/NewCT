@@ -1,5 +1,6 @@
 package cleartrip.controller;
 
+import cleartrip.controller.action.InicioAction;
 import cleartrip.controller.action.categoriadespesa.CategoriaDespesaCreateAction;
 import cleartrip.controller.action.categoriadespesa.CategoriaDespesaDeleteAction;
 import cleartrip.controller.action.categoriadespesa.CategoriaDespesaReadAction;
@@ -23,6 +24,8 @@ import cleartrip.controller.action.transporte.TransporteDeleteAction;
 import cleartrip.controller.action.transporte.TransporteReadAction;
 import cleartrip.controller.action.transporte.TransporteShowFormAction;
 import cleartrip.controller.action.transporte.TransporteUpdateAction;
+import cleartrip.controller.action.usuario.AlterarSenhaAction;
+import cleartrip.controller.action.usuario.AlterarSenhaShowFormAction;
 import cleartrip.controller.action.usuario.LoginAction;
 import cleartrip.controller.action.usuario.UsuarioCreateAction;
 import cleartrip.controller.action.usuario.UsuarioDeleteAction;
@@ -89,13 +92,30 @@ public class AppManager extends ApplicationManager {
         //Autenticação
         ac = new ActionConfig("Login", LoginAction.class);
         ac.addConsequence(ERROR, new Redirect("/"));
+        ac.addConsequence("Financeiro", new Redirect("Inicio.mtw"));
+        ac.addConsequence("Solicitante", new Redirect("Inicio.mtw"));
+        ac.addConsequence("Administrador", new Redirect("Inicio.mtw"));
+        this.add(ac);
+
+        ac = new ActionConfig("Logout", LogoutAction.class);
+        ac.addConsequence(SUCCESS, new Redirect("/"));
+        this.add(ac);
+
+        ac = new ActionConfig("Inicio", InicioAction.class);
+        ac.addConsequence(ERROR, new Redirect("/"));
         ac.addConsequence("Financeiro", new Redirect("ViagemRead.mtw"));
         ac.addConsequence("Solicitante", new Redirect("ViagemRead.mtw"));
         ac.addConsequence("Administrador", new Redirect("UsuarioRead.mtw"));
         this.add(ac);
 
-        ac = new ActionConfig("Logout", LogoutAction.class);
-        ac.addConsequence(SUCCESS, new Redirect("/"));
+        //Alterar Senha
+        ac = new ActionConfig("AlterarSenha", AlterarSenhaAction.class);
+        ac.addConsequence(ERROR, new Forward("jsp/usuario/alterarSenhaForm.page"));
+        ac.addConsequence(SUCCESS, new Redirect("Inicio.mtw"));
+        this.add(ac);
+        
+        ac = new ActionConfig("AlterarSenhaShowForm", AlterarSenhaShowFormAction.class);
+        ac.addConsequence(SUCCESS, new Forward("jsp/usuario/alterarSenhaForm.page"));
         this.add(ac);
 
         //Meio de Transporte
@@ -291,7 +311,7 @@ public class AppManager extends ApplicationManager {
         ac.addConsequence("CREATE", new Forward("jsp/despesa/createForm.page"));
         ac.addFilter(new AuthorizationFilter(new Permission("Despesa")));
         this.add(ac);
-        
+
         ac = new ActionConfig("DespesaRead", DespesaReadAction.class);
         ac.addConsequence(SUCCESS, new Forward("jsp/despesa/list.page"));
         ac.addConsequence(ERROR, new Redirect("ViagemRead.mtw"));

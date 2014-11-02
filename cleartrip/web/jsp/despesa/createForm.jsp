@@ -3,14 +3,16 @@
 
 <mtw:form klass="form-horizontal" action="DespesaCreate.mtw" method="post" enctype="multipart/form-data">
     <mtw:input type="hidden" name="viagem.id"/>
+    
     <legend>Informar Despesa</legend>
-
-    <div>
-        <label for="comprovante">Comprovante</label>
-        <div>
-            <input id="comprovante" name="comprovante" type="file"/>
+    
+    <div class="row">
+        <div class="col-md-3 col-sm-3">
+            <label for="comprovante">Comprovante</label>
+            <input id="comprovante" name="comprovante" class="file" type="file" />
         </div>
-    </div>
+
+    </div> 
     <br />
     <div>
         <label for="valor">Valor</label>
@@ -18,10 +20,10 @@
             <mtw:input id="valor" name="valor" type="text" />
         </div>
     </div>
-    <br />
+        <br />
     <div>
         <label for="inputCategoriaDespesa">Categoria Despesa</label>
-        <div class="controls">
+        <div>
             <mtw:select id="inputCategoriaDespesa" name="categoriaDespesa.id" list="categoriaDespesa" emptyField="true" emptyFieldValue="Selecione..."/>
         </div>
     </div>

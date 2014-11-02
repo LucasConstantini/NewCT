@@ -18,7 +18,7 @@
                 <li><mtw:hasAuthorization permission="Parametro"><a href="ParametroRead.mtw"><i class="fa fa-sliders"></i> Parametros</a></mtw:hasAuthorization></li>
                 <li><mtw:hasAuthorization permission="CategoriaDespesa"><a href="CategoriaDespesaRead.mtw"><i class="fa fa-money"></i> Categoria Despesa</a></mtw:hasAuthorization></li>
                 <li class="divider"></li>
-                <li><a href="UsuarioShowForm.mtw" paramId="login" paramProperty="login"><i class="fa fa-gears"></i> Configurações</a></li>
+                <li><a href="AlterarSenhaShowForm.mtw"><i class="fa fa-gears"></i> Alterar Senha</a></li>
                 <li class="divider"></li>
                 <li><a href="Logout.mtw"><i class="fa fa-power-off"></i> Sair</a></li>
             </ul>
