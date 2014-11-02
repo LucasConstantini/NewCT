@@ -18,7 +18,7 @@
 
 
 <div class="tabela tabelaFormatacao">
-    <display:table name="lista" pagesize="20" requestURI="" defaultsort="1">
+    <display:table name="lista" pagesize="4" requestURI="" defaultsort="1">
         <display:column property="login" sortName="login" sortable="true" title="Login" style="width:4%;"/>
         <display:column property="nome" sortable="true" title="Nome" style="width:10%;"/>
         <display:column property="tipo" sortable="true" title="Tipo" style="width:10%;"/>

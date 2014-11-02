@@ -44,7 +44,6 @@ public class ParametroCreateAction extends BaseAction {
             error = ServiceLocator.getParametroService().validateForCreate(form);
 
         } catch (Exception e) {
-            System.out.println("---------------------------->"+e);
         }
 
         if (error == null || error.isEmpty()) {

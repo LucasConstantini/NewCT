@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8080/" />
+<title>Administrador</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Administrador</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/cleartrip/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=mail</td>
+	<td>fabio@empresa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=pwd</td>
+	<td>1234</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=entrar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#form &gt; button.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=nome</td>
+	<td>João</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#form &gt; button.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=nome</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#form &gt; button.btn</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Novo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=inputNome</td>
+	<td>João</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=inputEmpresa</td>
+	<td>label=Casa A</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=inputCpf</td>
+	<td>44433322276</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=inputRg</td>
+	<td>MG 12.323.3332</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=inputEmailCorporativo</td>
+	<td>joao@empresa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=inputTelefoneCorporativo</td>
+	<td>3445-0099</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=tipo</td>
+	<td>label=Solicitante</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=entrar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Próximo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Anterior</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//img[@alt='Editar'])[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=inputNome</td>
+	<td>João da Silva</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=entrar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//img[@alt='Excluir'])[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Excluir</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//button[@type='button']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Sair</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

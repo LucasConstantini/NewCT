@@ -32,7 +32,8 @@
 <div class="tabela">
     <display:table name="lista" pagesize="20" requestURI="" defaultsort="1">
         <display:column property="destino" sortName="destino" sortable="true" title="Destino" style="width:50%;"/>
-        <display:column title="Editar" value="<img src='img/editar.png'alt='Editar'>" href="ViagemShowForm.mtw"  paramId="id" paramProperty="id" style="width:5%;"/>
+        <display:column title="Lancar Despesa" value="<img src='img/celular.png'>" href="DespesaShowForm.mtw" style="width:5%;" paramId="viagem.id" paramProperty="id"/>
+        <display:column title="Listar Despesa" value="<img src='img/configuracao1.png'>" href="DespesaRead.mtw"  paramId="viagem.id" paramProperty="id" style="width:5%;"/>
         <display:column title="Excluir" value="<img src='img/lixeira.png'alt='Excluir'>" href="ViagemDelete.mtw" class="deleteLink" paramId="id" paramProperty="id" style="width:5%;"/>
     </display:table>
 </div>
