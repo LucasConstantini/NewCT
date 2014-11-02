@@ -17,8 +17,8 @@ public class EmpresaDAO implements BaseDAO<Empresa> {
 
     @Override
     public void create(Empresa e, Connection conn) throws Exception {
-        String slq = "INSERT INTO empresa(nome, nomefantasia, endereco, telefone, nomerepresentante, cpfrepresentante, cnpj) VALUES(?,?,?,?,?,?,?) RETURNING id;";
-        PreparedStatement ps = conn.prepareStatement(slq);
+        String sql = "INSERT INTO empresa(nome, nomefantasia, endereco, telefone, nomerepresentante, cpfrepresentante, cnpj) VALUES(?,?,?,?,?,?,?) RETURNING id;";
+        PreparedStatement ps = conn.prepareStatement(sql);
         int i = 0;
         ps.setString(++i, e.getNome());
         ps.setString(++i, e.getNomeFantasia());

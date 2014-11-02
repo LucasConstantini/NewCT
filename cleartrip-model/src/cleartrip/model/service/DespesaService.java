@@ -5,8 +5,6 @@ import cleartrip.model.base.service.BaseDespesaService;
 import cleartrip.model.dao.DespesaDAO;
 import cleartrip.model.pojo.Despesa;
 import java.sql.Connection;
-import java.sql.Date;
-import java.sql.Time;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,33 +30,33 @@ public class DespesaService implements BaseDespesaService {
     @Override
     public Map<String, String> validateForCreate(Map<String, Object> properties) throws Exception {
         Map<String, String> errors = new HashMap<String, String>();
-        if (properties != null) {
-            Long idViagem = (Long) properties.get("viagem.id");
-            Long idCategoriaDespesa = (Long) properties.get("categoriaDespesa.id");
-            Double valor = (Double) properties.get("valor");
-            Date dataCompra = (Date) properties.get("dataCompra");
-            Time horaCompra = (Time) properties.get("horaCompra");
-            Double valorRealAutorizado = (Double) properties.get("valorRealAutorizado");
-
-            if (idViagem == null) {
-                errors.put("viagem", "Campo obrigatório!");
-            }
-            if (idCategoriaDespesa == null) {
-                errors.put("categoriaDespesa", "Campo obrigatório!");
-            }
-            if (valor == null || valor < 0) {
-                errors.put("valor", "Campo Obrigatório!");
-            }
-            if (dataCompra == null) {
-                errors.put("dataCompra", "Campo obrigatório!");
-            }
-            if (horaCompra == null) {
-                errors.put("horaCompra", "Campo obrigatório!");
-            }
-            if (valorRealAutorizado == null || valorRealAutorizado < 0) {
-                errors.put("valorRealAutorizado", "Campo obrigatório!");
-            }
-        }
+//        if (properties != null) {
+//            Long idViagem = (Long) properties.get("viagem.id");
+//            Long idCategoriaDespesa = (Long) properties.get("categoriaDespesa.id");
+//            Double valor = (Double) properties.get("valor");
+//            Date dataCompra = (Date) properties.get("dataCompra");
+//            Time horaCompra = (Time) properties.get("horaCompra");
+//            Double valorRealAutorizado = (Double) properties.get("valorRealAutorizado");
+//
+//            if (idViagem == null) {
+//                errors.put("viagem", "Campo obrigatório!");
+//            }
+//            if (idCategoriaDespesa == null) {
+//                errors.put("categoriaDespesa", "Campo obrigatório!");
+//            }
+//            if (valor == null || valor < 0) {
+//                errors.put("valor", "Campo Obrigatório!");
+//            }
+//            if (dataCompra == null) {
+//                errors.put("dataCompra", "Campo obrigatório!");
+//            }
+//            if (horaCompra == null) {
+//                errors.put("horaCompra", "Campo obrigatório!");
+//            }
+//            if (valorRealAutorizado == null || valorRealAutorizado < 0) {
+//                errors.put("valorRealAutorizado", "Campo obrigatório!");
+//            }
+//        }
         return errors;
     }
 
@@ -127,34 +125,6 @@ public class DespesaService implements BaseDespesaService {
             throw e;
         }
 
-    }
-
-    @Override
-    public void setImagem(byte[] imagem) throws Exception {
-        Connection conn = ConnectionManager.getInstance().getConnection();
-        try {
-            DespesaDAO dao = new DespesaDAO();
-            dao.setImagem(conn, imagem);
-            conn.commit();
-            conn.close();
-        } catch (Exception e) {
-            conn.rollback();
-        }
-    }
-
-    @Override
-    public byte[] getImagem(Long id) throws Exception {
-        byte[] imagem = null;
-        Connection conn = ConnectionManager.getInstance().getConnection();
-        try {
-            DespesaDAO dao = new DespesaDAO();
-            imagem = dao.getImagem(conn, id);
-            conn.commit();
-            conn.close();
-        } catch (Exception e) {
-            conn.rollback();
-        }
-        return imagem;
     }
 
 }

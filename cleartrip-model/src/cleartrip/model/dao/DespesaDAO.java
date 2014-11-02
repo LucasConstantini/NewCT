@@ -1,7 +1,9 @@
 package cleartrip.model.dao;
 
 import cleartrip.model.base.BaseDAO;
+import cleartrip.model.pojo.CategoriaDespesa;
 import cleartrip.model.pojo.Despesa;
+import cleartrip.model.pojo.Viagem;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,37 +13,46 @@ import java.util.List;
 import java.util.Map;
 
 public class DespesaDAO implements BaseDAO<Despesa> {
+    
+    public static final String CRITERION_VIAGEM = "1";
+    public static final String CRITERION_USUARIO = "2";
 
-    public void setImagem(Connection conn, byte[] imagem) throws Exception {
-        String sql = "INSERT INTO foto(arquivo) VALUES (?);";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        int i = 0;
-        ps.setBytes(++i, imagem);
-        ps.execute();
-        ps.close();
-    }
-
-    public byte[] getImagem(Connection conn, Long id) throws Exception {
-        String sql = "SELECT arquivo FROM foto WHERE id=?;";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setLong(1, id);
-        ResultSet rs = ps.executeQuery();
-        byte[] imagem = null;
-        if (rs.next()) {
-            imagem = rs.getBytes("foto");
-        }
-        rs.close();
-        ps.close();
-        return imagem;
-    }
-
+//    public void setImagem(Connection conn, byte[] imagem) throws Exception {
+//        String sql = "INSERT INTO foto(arquivo) VALUES (?);";
+//        PreparedStatement ps = conn.prepareStatement(sql);
+//        int i = 0;
+//        ps.setBytes(++i, imagem);
+//        ps.execute();
+//        ps.close();
+//    }
+//    public byte[] getImagem(Connection conn, Long id) throws Exception {
+//        String sql = "SELECT arquivo FROM foto WHERE id=?;";
+//        PreparedStatement ps = conn.prepareStatement(sql);
+//        ps.setLong(1, id);
+//        ResultSet rs = ps.executeQuery();
+//        byte[] imagem = null;
+//        if (rs.next()) {
+//            imagem = rs.getBytes("foto");
+//        }
+//        rs.close();
+//        ps.close();
+//        return imagem;
+//    }
     @Override
     public void create(Despesa e, Connection conn) throws Exception {
-        String sql = "INSERT INTO despesa(comprovante, valor, nomeestabelecimento, datacompra, horacompra, cnpj, descritivo, valorrealautorizado, viagem_fk, categoria_despesa_fk) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id;";
+        String sql = "INSERT INTO despesa(viagem_fk, categoria_despesa_fk, valor, nomeestabelecimento, cnpj, descritivo, valorrealautorizado, datacompra, horacompra, comprovante) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id;";
         PreparedStatement ps = conn.prepareStatement(sql);
         int i = 0;
-        
-
+        ps.setLong(++i, e.getViagem().getId());
+        ps.setLong(++i, e.getCategoriaDespesa().getId());
+        ps.setDouble(++i, e.getValor());
+        ps.setString(++i, e.getNomeEstabelecimento());
+        ps.setLong(++i, e.getCnpj());
+        ps.setString(++i, e.getDescritivo());
+        ps.setDouble(++i, e.getValorRealAutorizado());
+        ps.setString(++i, e.getDataCompra());
+        ps.setString(++i, e.getHoraCompra());
+        ps.setBytes(++i, e.getFoto());
         ps.execute();
         ps.close();
 
@@ -56,47 +67,55 @@ public class DespesaDAO implements BaseDAO<Despesa> {
     @Override
     public List<Despesa> readByCriteria(Map<String, Object> criteria, Connection conn) throws Exception {
         List<Despesa> lista = new ArrayList<Despesa>();
-//        String sql = "SELECT usuario.id, usuario.tipo,usuario.login,usuario.senha,usuario.nome,usuario.cpf,usuario.rg,usuario.emailcorporativo,usuario.emailpessoal,usuario.telefonecorporativo,usuario.telefonepessoal, empresa.id as empresa_id, empresa.nome as empresa_nome FROM empresa right join usuario on usuario.empresa_fk = empresa.id WHERE 1=1";
-//
-//        String criterionTipoEq = (String) criteria.get(CRITERION_TIPO_EQ);
-//        if (criterionTipoEq != null && !criterionTipoEq.trim().isEmpty()) {
-//            sql += " AND usuario.tipo = '" + criterionTipoEq + "'";
-//        }
-//
-//        String criterionUsuarioEq = (String) criteria.get(CRITERION_USUARIO_EQ);
-//        if (criterionUsuarioEq != null) {
-//            sql += " AND usuario.login = '" + criterionUsuarioEq + "'";
-//        }
-//
-//        String criterionSenhaEq = (String) criteria.get(CRITERION_SENHA_EQ);
-//        if (criterionSenhaEq != null) {
-//            sql += " AND usuario.senha = '" + criterionSenhaEq + "'";
-//        }
-//
-//        //Pesquisa por nome do usuário
-//        String criterionNomeILike = (String) criteria.get(CRITERION_NOME_I_LIKE);
-//        if (criterionNomeILike != null && !criterionNomeILike.trim().isEmpty()) {
-//            sql += " AND lower(usuario.nome) ilike '%" + criterionNomeILike + "%'";
-//        }
-//
-//        Statement s = conn.createStatement();
-//        ResultSet rs = s.executeQuery(sql);
-//        while (rs.next()) {
-//            Despesa e = new Despesa();
-//           
-//            lista.add(e);
-//        }
-//        rs.close();
-//        s.close();
-//
+        String sql = "SELECT despesa.*, usuario.id as usuario_id, usuario.nome as usuario_nome, categoria_despesa.id as categoria_despesa_id, viagem.id as viagem_id FROM viagem right join usuario on viagem.usuario_fk = usuario.id right join despesa on despesa.viagem_fk = viagem.id right join categoria_despesa on despesa.categoria_despesa_fk = categoria_despesa.id WHERE 1=1";
+        Long criterionUsuario = (Long) criteria.get(CRITERION_USUARIO);
+        if (criterionUsuario != null && criterionUsuario > 0) {
+            sql += " AND usuario.id = '" + criterionUsuario + "'";
+        }
+
+        Long criterionViagem = (Long) criteria.get(CRITERION_VIAGEM);
+        if (criterionViagem != null && criterionViagem > 0) {
+            sql += " AND viagem.id = '" + criterionViagem + "'";
+        }
+        Statement s = conn.createStatement();
+        ResultSet rs = s.executeQuery(sql);
+        while(rs.next()){
+            Despesa d = new Despesa();
+            d.setId(rs.getLong("id"));
+            d.setFoto(rs.getBytes("comprovante"));
+            d.setValor(rs.getDouble("valor"));
+            d.setNomeEstabelecimento(rs.getString("nomeestabelecimento"));
+            d.setDataCompra(rs.getString("datacompra"));
+            d.setHoraCompra(rs.getString("horacompra"));
+            d.setCnpj(rs.getLong("cnpj"));
+            d.setDescritivo(rs.getString("descritivo"));
+            d.setValorRealAutorizado(rs.getDouble("valorrealautorizado"));
+            
+            //Categoria Despesa
+            CategoriaDespesa categoriaDespesa = new CategoriaDespesa();
+            categoriaDespesa.setId(rs.getLong("categoria_despesa_id"));
+            d.setCategoriaDespesa(categoriaDespesa);
+            
+            //Viagem
+            Viagem viagem = new Viagem();
+            viagem.setId(rs.getLong("viagem_id"));
+            d.setViagem(viagem);
+            
+            lista.add(d);
+        }
+        
+        rs.close();
+        s.close();
+
         return lista;
     }
+
     @Override
     public void update(Despesa e, Connection conn) throws Exception {
         String sql = "UPDATE despesa SET comprovante=?, valor=?,nomeestabelecimento=?, datacompra=?, horacompra=?, cnpj=?, descritivo=?, valorrealautorizado=?, viagem_fk=?, categoria_despesa_fk=? WHERE id=?;";
         PreparedStatement ps = conn.prepareStatement(sql);
         int i = 0;
-       
+
         ps.execute();
         ps.close();
     }
