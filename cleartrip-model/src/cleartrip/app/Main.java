@@ -1,19 +1,45 @@
 package cleartrip.app;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import cleartrip.model.ServiceLocator;
+import cleartrip.model.pojo.Viagem;
+import org.joda.time.DateTime;
+import org.joda.time.Days;
 
 public class Main {
 
-    public static void main(String[] args) throws ParseException {
+    public static void main(String[] args) throws Exception {
+        
+        Integer ano, mes, dia, hora, minuto;
+        Viagem v = new Viagem();
 
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        Date date = new Date();
-        String r = dateFormat.format(date);
-        date = dateFormat.parse(r);
-        System.out.println("Resultado: " + date);
+        v = ServiceLocator.getViagemService().readById(2L);
+
+        String[] auxDataInicio = v.getDataPartida().split("/");
+        String[] auxHoraInicio = v.getHoraPartida().split(":");
+
+        dia = Integer.parseInt(auxDataInicio[0]);
+        mes = Integer.parseInt(auxDataInicio[1]);
+        ano = Integer.parseInt(auxDataInicio[2]);
+        hora = Integer.parseInt(auxHoraInicio[0]);
+        minuto = Integer.parseInt(auxHoraInicio[1]);
+        
+        DateTime dataInicio = new DateTime(ano, mes, dia, hora, minuto);
+
+        String[] auxDataFim = v.getDataVolta().split("/");
+        String[] auxHoraFim = v.getHoraVolta().split(":");
+
+        dia = Integer.parseInt(auxDataFim[0]);
+        mes = Integer.parseInt(auxDataFim[1]);
+        ano = Integer.parseInt(auxDataFim[2]);
+        hora = Integer.parseInt(auxHoraFim[0]);
+        minuto = Integer.parseInt(auxHoraFim[1]);
+
+        DateTime dataFim = new DateTime(ano, mes, dia, hora, minuto);
+
+        int dias = Days.daysBetween(dataInicio, dataFim).getDays();
+
+        System.out.println(dias);
+
     }
 
 }
