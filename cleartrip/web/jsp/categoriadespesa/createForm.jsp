@@ -16,7 +16,7 @@
     <div>
         <label for="inputValorLimite">Valor Limite</label>
         <div>
-            <mtw:input type="text" id="inputValorLimite" name="valorLimite"/>
+            <mtw:input type="text" id="inputValorLimite" name="valorLimite" klass="dinheiro"/>
             <span class="label label-important">${error.valorLimite}</span>
         </div>
     </div>
@@ -27,3 +27,8 @@
         </div>
     </div>
 </mtw:form>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("input.dinheiro").maskMoney({showSymbol: true, symbol: "R$", decimal: ",", thousands: "."});
+    });
+</script>

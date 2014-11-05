@@ -14,6 +14,7 @@
         <script src="js/jquery.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="jquery.maskedinput-1.3.min.js"></script>
+        <script src="jquery.maskMoney.js"></script>
         
         <title>ClearTrip</title>     
     </head>
