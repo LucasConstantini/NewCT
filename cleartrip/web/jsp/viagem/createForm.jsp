@@ -207,3 +207,15 @@
         
     </mtw:form>
 </div>
+<script>
+    jQuery(function($) {
+        $("#inputTelefoneDestino").mask("(99) 9999-9999");
+        $("#inputDataCompromisso").mask("99/99/9999");
+        $("#inputHoraCompromisso").mask("99:99");
+        $("#inputTelefonePartida").mask("(99) 9999-9999");
+        $("#inputDataPartida").mask("99/99/9999");
+        $("#inputHoraPartida").mask("99:99");
+        $("#inputDataVolta").mask("99/99/9999");
+        $("#inputHoraVolta").mask("99:99");
+    });
+</script>
