@@ -10,7 +10,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
         
         Integer ano, mes, dia, hora, minuto;
-        Viagem v = new Viagem();
+        Viagem v;
 
         v = ServiceLocator.getViagemService().readById(2L);
 

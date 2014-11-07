@@ -67,7 +67,7 @@ public class DespesaDAO implements BaseDAO<Despesa> {
     @Override
     public List<Despesa> readByCriteria(Map<String, Object> criteria, Connection conn) throws Exception {
         List<Despesa> lista = new ArrayList<Despesa>();
-        String sql = "SELECT despesa.*, usuario.id as usuario_id, usuario.nome as usuario_nome, categoria_despesa.id as categoria_despesa_id, viagem.id as viagem_id FROM viagem right join usuario on viagem.usuario_fk = usuario.id right join despesa on despesa.viagem_fk = viagem.id right join categoria_despesa on despesa.categoria_despesa_fk = categoria_despesa.id WHERE 1=1";
+        String sql = "SELECT despesa.*, usuario.id as usuario_id, usuario.nome as usuario_nome, categoria_despesa.id as categoria_despesa_id, categoria_despesa.nome as categoria_despesa_nome , viagem.id as viagem_id FROM viagem right join usuario on viagem.usuario_fk = usuario.id right join despesa on despesa.viagem_fk = viagem.id right join categoria_despesa on despesa.categoria_despesa_fk = categoria_despesa.id WHERE 1=1";
         Long criterionUsuario = (Long) criteria.get(CRITERION_USUARIO);
         if (criterionUsuario != null && criterionUsuario > 0) {
             sql += " AND usuario.id = '" + criterionUsuario + "'";
@@ -94,6 +94,7 @@ public class DespesaDAO implements BaseDAO<Despesa> {
             //Categoria Despesa
             CategoriaDespesa categoriaDespesa = new CategoriaDespesa();
             categoriaDespesa.setId(rs.getLong("categoria_despesa_id"));
+            categoriaDespesa.setNome(rs.getString("categoria_despesa_nome"));
             d.setCategoriaDespesa(categoriaDespesa);
             
             //Viagem

@@ -14,7 +14,7 @@ public class EmpresaDAO implements BaseDAO<Empresa> {
 
     public static final String CRITERION_NOME_I_LIKE = "1";
     public static final String CRITERION_CPF_REPRESENTANTE = "2";
-
+    
     @Override
     public void create(Empresa e, Connection conn) throws Exception {
         String sql = "INSERT INTO empresa(nome, nomefantasia, endereco, telefone, nomerepresentante, cpfrepresentante, cnpj) VALUES(?,?,?,?,?,?,?) RETURNING id;";

@@ -4,6 +4,7 @@ import cleartrip.model.base.BaseDAO;
 import cleartrip.model.pojo.Empresa;
 import cleartrip.model.pojo.Parametro;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -14,6 +15,8 @@ import java.util.Map;
 public class ParametroDAO implements BaseDAO<Parametro> {
     
     public static final String CRITERION_USUARIO = "1";
+    public static final String CRITERION_DATA_TERMINO = "3";
+    
 
     @Override
     public void create(Parametro e, Connection conn) throws Exception {
@@ -81,6 +84,14 @@ public class ParametroDAO implements BaseDAO<Parametro> {
         if (criterionUsuario != null) {
             sql += " AND usuario.id = " + criterionUsuario;
         }
+        
+        java.util.Date dataFim = (java.util.Date) criteria.get(CRITERION_DATA_TERMINO);
+
+        if (dataFim != null) {
+            java.sql.Date criterion_data_fim = new Date(dataFim.getTime());
+            sql += " AND datatermino <= '" + criterion_data_fim + "'";
+        }
+        
         Statement s = conn.createStatement();
         ResultSet rs = s.executeQuery(sql);
         while (rs.next()) {
