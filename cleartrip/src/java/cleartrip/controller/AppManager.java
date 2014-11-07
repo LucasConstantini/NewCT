@@ -6,6 +6,7 @@ import cleartrip.controller.action.categoriadespesa.CategoriaDespesaDeleteAction
 import cleartrip.controller.action.categoriadespesa.CategoriaDespesaReadAction;
 import cleartrip.controller.action.categoriadespesa.CategoriaDespesaShowFormAction;
 import cleartrip.controller.action.categoriadespesa.CategoriaDespesaUpdateAction;
+import cleartrip.controller.action.despesa.ControlarDespesaAction;
 import cleartrip.controller.action.despesa.DespesaCreateAction;
 import cleartrip.controller.action.despesa.DespesaReadAction;
 import cleartrip.controller.action.despesa.DespesaShowFormAction;
@@ -306,16 +307,22 @@ public class AppManager extends ApplicationManager {
         ac.addFilter(new FileUploadFilter());
         addActionConfig(ac);
         this.add(ac);
-
+        
         ac = new ActionConfig("DespesaShowForm", DespesaShowFormAction.class);
         ac.addConsequence("CREATE", new Forward("jsp/despesa/createForm.page"));
         ac.addFilter(new AuthorizationFilter(new Permission("Despesa")));
         this.add(ac);
-
+        
         ac = new ActionConfig("DespesaRead", DespesaReadAction.class);
         ac.addConsequence(SUCCESS, new Forward("jsp/despesa/list.page"));
         ac.addConsequence(ERROR, new Redirect("ViagemRead.mtw"));
         ac.addFilter(new AuthorizationFilter(new Permission("Despesa")));
         this.add(ac);
+        
+        ac = new ActionConfig("ControlarDespesa", ControlarDespesaAction.class);
+        ac.addConsequence(SUCCESS, new Forward("jsp/despesa/controlarDespesa.page"));
+        ac.addFilter(new AuthorizationFilter(new Permission("Despesa")));
+        this.add(ac);
+        
     }
 }
