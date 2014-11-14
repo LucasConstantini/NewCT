@@ -2,6 +2,7 @@ package cleartrip.model.dao;
 
 import cleartrip.model.base.BaseDAO;
 import cleartrip.model.pojo.CategoriaDespesa;
+import cleartrip.model.pojo.Empresa;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,10 +17,12 @@ public class CategoriaDespesaDAO implements BaseDAO<CategoriaDespesa> {
     public static final String CRITERION_NOME = "1";
     public static final String CRITERION_VALOR_LIMITE_INICIO = "2";
     public static final String CRITERION_VALOR_LIMITE_FIM = "3";
+    public static final String CRITERION_EMPRESA = "4";
+    
 
     @Override
     public void create(CategoriaDespesa e, Connection conn) throws Exception {
-        String sql = "INSERT INTO categoria_despesa(nome, valorlimite) VALUES(?,?) RETURNING id";
+        String sql = "INSERT INTO categoria_despesa(nome, valorlimite, empresa_fk) VALUES(?,?,?) RETURNING id";
         PreparedStatement ps = conn.prepareStatement(sql);
         int i = 0;
         //campo obrigatório
@@ -30,6 +33,7 @@ public class CategoriaDespesaDAO implements BaseDAO<CategoriaDespesa> {
         } else {
             ps.setNull(++i, Types.DOUBLE);
         }
+        ps.setLong(++i, e.getEmpresa().getId());
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
             e.setId(rs.getLong("id"));
@@ -42,7 +46,7 @@ public class CategoriaDespesaDAO implements BaseDAO<CategoriaDespesa> {
     @Override
     public CategoriaDespesa readById(Long id, Connection conn) throws Exception {
         CategoriaDespesa categoriaDespesa = null;
-        String sql = "SELECT * from categoria_despesa WHERE id=?";
+        String sql = "SELECT categoria_despesa.*, empresa.id as empresa_id, empresa.nome as empresa_nome from categoria_despesa left join empresa on categoria_despesa.empresa_fk = empresa.id WHERE id=?";
         PreparedStatement ps = conn.prepareStatement(sql);
         int i = 0;
         ps.setLong(++i, id);
@@ -53,6 +57,12 @@ public class CategoriaDespesaDAO implements BaseDAO<CategoriaDespesa> {
             categoriaDespesa.setId(rs.getLong("id"));
             categoriaDespesa.setNome(rs.getString("nome"));
             categoriaDespesa.setValorLimite(rs.getDouble("valorlimite"));
+            
+            //empresa
+            Empresa empresa = new Empresa();
+            empresa.setId(rs.getLong("empresa_id"));
+            empresa.setNome(rs.getString("empresa_nome"));
+            categoriaDespesa.setEmpresa(empresa);
 
         }
         rs.close();
@@ -63,20 +73,26 @@ public class CategoriaDespesaDAO implements BaseDAO<CategoriaDespesa> {
     @Override
     public List<CategoriaDespesa> readByCriteria(Map<String, Object> criteria, Connection conn) throws Exception {
         List<CategoriaDespesa> lista = new ArrayList<CategoriaDespesa>();
-        String sql = "SELECT * from categoria_despesa WHERE 1=1";
+        String sql = "SELECT categoria_despesa.*, empresa.id as empresa_id, empresa.nome as empresa_nome from categoria_despesa left join empresa on categoria_despesa.empresa_fk = empresa.id WHERE 1=1";
 
         //criterio por nome
         String criterionNome = (String) criteria.get(CRITERION_NOME);
         if (criterionNome != null && !criterionNome.trim().isEmpty()) {
             sql += " AND categoria_despesa.nome ILIKE '%" + criterionNome + "%'";
         }
+        
+        //criterio por nome
+        Long criterionEmpresa = (Long) criteria.get(CRITERION_EMPRESA);
+        if (criterionEmpresa != null) {
+            sql += " AND empresa.id = " + criterionEmpresa;
+        }
 
         //criterio por intervalo de valores
-//        Double criterionValorLimite1 = (Double) criteria.get(CRITERION_VALOR_LIMITE_INICIO);
-//        Double criterionValorLimite2 = (Double) criteria.get(CRITERION_VALOR_LIMITE_FIM);
-//        if (criterionValorLimite2 != null && !(criterionValorLimite2 < 0)) {
-//            sql += " AND categoria_despesa.valor_limite between " + criterionValorLimite1 + " and " + criterionValorLimite2;
-//        }
+        Double criterionValorLimite1 = (Double) criteria.get(CRITERION_VALOR_LIMITE_INICIO);
+        Double criterionValorLimite2 = (Double) criteria.get(CRITERION_VALOR_LIMITE_FIM);
+        if (criterionValorLimite2 != null && !(criterionValorLimite2 < 0)) {
+            sql += " AND categoria_despesa.valorlimite between " + criterionValorLimite1 + " and " + criterionValorLimite2;
+        }
 
         PreparedStatement ps = conn.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
@@ -87,6 +103,12 @@ public class CategoriaDespesaDAO implements BaseDAO<CategoriaDespesa> {
             categoriaDespesa.setNome(rs.getString("nome"));
             categoriaDespesa.setValorLimite(rs.getDouble("valorlimite"));
 
+            //empresa
+            Empresa empresa = new Empresa();
+            empresa.setId(rs.getLong("empresa_id"));
+            empresa.setNome(rs.getString("empresa_nome"));
+            categoriaDespesa.setEmpresa(empresa);
+
             lista.add(categoriaDespesa);
         }
         rs.close();
@@ -96,7 +118,7 @@ public class CategoriaDespesaDAO implements BaseDAO<CategoriaDespesa> {
 
     @Override
     public void update(CategoriaDespesa e, Connection conn) throws Exception {
-        String sql = "UPDATE categoria_despesa SET nome=?, valorlimite=? WHERE id=?";
+        String sql = "UPDATE categoria_despesa SET nome=?, valorlimite=?, empresa_fk=? WHERE id=?";
         PreparedStatement ps = conn.prepareStatement(sql);
         int i = 0;
 
@@ -107,6 +129,7 @@ public class CategoriaDespesaDAO implements BaseDAO<CategoriaDespesa> {
         } else {
             ps.setNull(++i, Types.DOUBLE);
         }
+        ps.setLong(++i, e.getEmpresa().getId());
         ps.setLong(++i, e.getId());
         ps.execute();
         ps.close();

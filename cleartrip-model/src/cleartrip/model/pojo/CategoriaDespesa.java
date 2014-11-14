@@ -4,9 +4,10 @@ import cleartrip.model.base.BasePOJO;
 
 public class CategoriaDespesa extends BasePOJO {
 
+    
     private String nome;
     private Double valorLimite;
-
+    private Empresa empresa;
    
 
     /**
@@ -36,4 +37,20 @@ public class CategoriaDespesa extends BasePOJO {
     public void setValorLimite(Double valorLimite) {
         this.valorLimite = valorLimite;
     }
+
+    /**
+     * @return the empresa
+     */
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    /**
+     * @param empresa the empresa to set
+     */
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+
+    
 }

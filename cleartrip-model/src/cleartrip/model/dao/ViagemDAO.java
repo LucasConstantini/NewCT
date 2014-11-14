@@ -152,9 +152,9 @@ public class ViagemDAO implements BaseDAO<Viagem> {
             e.setNumeroVooVolta(rs.getString("numerovoovolta"));
             e.setValorAdiantameto(rs.getDouble("valoradiantamento"));
             e.setValorReembolso(rs.getDouble("valorreembolso"));
-            e.setValorRessarcimento(rs.getDouble("valorressarciamento"));
+            e.setValorRessarcimento(rs.getDouble("valorressarcimento"));
             e.setNumeroReciboAdiantamento(rs.getString("nreciboadiantamento"));
-            e.setNumeroReciboRessarcimento(rs.getString("nreciboressarciamento"));
+            e.setNumeroReciboRessarcimento(rs.getString("nreciboressarcimento"));
             e.setRelatoViagem(rs.getString("relatoviagem"));
             e.setDataAprovacao(rs.getString("dataaprovacao"));
             e.setDataEncerramento(rs.getString("dataencerramento"));
@@ -236,9 +236,9 @@ public class ViagemDAO implements BaseDAO<Viagem> {
             e.setNumeroVooVolta(rs.getString("numerovoovolta"));
             e.setValorAdiantameto(rs.getDouble("valoradiantamento"));
             e.setValorReembolso(rs.getDouble("valorreembolso"));
-            e.setValorRessarcimento(rs.getDouble("valorressarciamento"));
+            e.setValorRessarcimento(rs.getDouble("valorressarcimento"));
             e.setNumeroReciboAdiantamento(rs.getString("nreciboadiantamento"));
-            e.setNumeroReciboRessarcimento(rs.getString("nreciboressarciamento"));
+            e.setNumeroReciboRessarcimento(rs.getString("nreciboressarcimento"));
             e.setRelatoViagem(rs.getString("relatoviagem"));
             e.setDataAprovacao(rs.getString("dataaprovacao"));
             e.setDataEncerramento(rs.getString("dataencerramento"));

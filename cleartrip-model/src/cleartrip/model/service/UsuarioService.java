@@ -57,6 +57,23 @@ public class UsuarioService implements BaseUsuarioService {
         }
 
     }
+    
+    @Override
+    public Map<String,Double> listGastos(Long id) throws Exception{
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        Map<String, Double> mapa = new HashMap<>();
+        try {
+            UsuarioDAO dao = new UsuarioDAO();//DAO -Data Access Object
+            mapa = dao.ListGastos(id, conn);
+            conn.commit();
+            conn.close();//fecha a conexão para liberar a conexão para o próximo que for usar
+        } catch (Exception e) {
+            conn.rollback();
+            throw e;
+        }
+        
+        return mapa;
+    }
 
     @Override
     public Map<String, String> validateForCreate(Map<String, Object> properties) throws Exception {

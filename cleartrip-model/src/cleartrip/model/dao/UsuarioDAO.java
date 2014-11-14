@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +26,26 @@ public class UsuarioDAO implements BaseDAO<Usuario> {
     public static final String CRITERION_NOME_I_LIKE = "2";
     public static final String CRITERION_USUARIO_EQ = "3";
     public static final String CRITERION_SENHA_EQ = "4";
+    public static final String CRITERION_USUARIO_DESPESAS = "5";
+
+    public Map<String, Double> ListGastos(Long id, Connection conn) throws Exception {
+        String sql = "select cd.nome,sum(d.valor) from "
+                + "(select id, nome from usuario where id=?) u "
+                + "left join viagem v on u.id=v.usuario_fk "
+                + "left join despesa d on v.id=d.viagem_fk "
+                + "left join categoria_despesa cd on cd.id=d.categoria_despesa_fk "
+                + "group by u.nome,cd.nome";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setLong(1, id);
+        ResultSet rs = ps.executeQuery();
+        Map<String, Double> results = new LinkedHashMap<>();
+        while (rs.next()) {
+            results.put(rs.getString("nome"), rs.getDouble("sum"));
+        }
+        rs.close();
+        ps.close();
+        return results;
+    }
 
     @Override
     public void create(Usuario e, Connection conn) throws Exception {
@@ -180,7 +201,7 @@ public class UsuarioDAO implements BaseDAO<Usuario> {
         } else {
             ps.setNull(++i, Types.VARCHAR);
         }
-        if (e.getEmailCorporativo()!= null) {
+        if (e.getEmailCorporativo() != null) {
             ps.setString(++i, e.getEmailCorporativo());
         } else {
             ps.setNull(++i, Types.VARCHAR);
@@ -190,9 +211,9 @@ public class UsuarioDAO implements BaseDAO<Usuario> {
         } else {
             ps.setNull(++i, Types.VARCHAR);
         }
-        if(e.getTelefoneCorporativo() != null){
+        if (e.getTelefoneCorporativo() != null) {
             ps.setString(++i, e.getTelefoneCorporativo());
-        } else{
+        } else {
             ps.setNull(++i, Types.VARCHAR);
         }
         ps.setString(++i, e.getLogin());
