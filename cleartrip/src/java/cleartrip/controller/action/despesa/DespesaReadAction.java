@@ -28,6 +28,9 @@ public class DespesaReadAction extends BaseAction {
             consequence = ERROR;
         }
 
+        Map<String,Double> mapa = ServiceLocator.getUsuarioService().listGastos(usuarioLogado.getId());
+        output.setValue("gastos", mapa);
+        
         return consequence;
     }
 }
